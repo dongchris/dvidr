@@ -1,54 +1,14 @@
 <!DOCTYPE html>
-<html lang = "en-US">
+<html>
 
 <head>
-
-<link rel = "stylesheet" href = "home.css">
-<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
-<title>d/vidr</title>
-
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-<meta charset=utf-8 />
-
-<style>
-  article, aside, figure, footer, header, hgroup, 
-  menu, nav, section { display: block; }
-</style>
-
+    <title>AWS S3 File Upload</title>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
 </head>
 
-<body style = "background-image: none">
-
-	<a href = 'login.html' align = 'right'> Login</a>
-	<a href = 'index.html'>
-		
-<img src = "logo.png" alt = "d/vidr" style = "border: none; " align = 'top' >
-
-	</a>
-	
-<div class = "container">
-	<img src = "split.jpeg" style = "width: 100%;">
-	<div class = "centered"><b>SPLITTING BILLS EASIER WITH FRIENDS</b></div>
-
-
-<h1> How does it work?</h1>
-
-
-<blockquote>
-
-Step 1: Upload a receipt image.<br />
-Step 2: Assign items to friends.<br />
-Step 3: Wait for Stripe to charge credit cards accordingly.<br /><br />
-
-The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simply upload the image by clicking the button below.<br /><br /><br />
-	
-<input type="file" id="file-chooser" onchange="readURL(this);"/>
-<div class = "upload">
-    <button id="upload-button">Upload Image</button>
-</div>
-
+<body>
+    <input type="file" id="file-chooser" />
+    <button id="upload-button">Upload to S3</button>
     <div id="results"></div>
     <script type="text/javascript">
     AWS.config.region = 'us-west-2'; // 1. Enter your region
@@ -111,25 +71,7 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
     }
     listObjs();
 
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-
     </script>
-    <br />
-
-    <img id="blah" src="#" height = 500px width = 400px alt = ''/> <br /> <br />
-
-</blockquote>
-
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 
 <head>
 
-<link rel = "stylesheet" href = "home.css">
+<link rel = "stylesheet" type ="text/css" href = "{{ url_for('static',filename='styles/homepage.css') }}">
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
 <title>d/vidr</title>
 
@@ -21,15 +21,15 @@
 
 <body style = "background-image: none">
 
-	<a href = 'login.html' align = 'right'> Login</a>
-	<a href = 'index.html'>
-		
-<img src = "logo.png" alt = "d/vidr" style = "border: none; " align = 'top' >
+	<a href = 'dvidr/login' align = 'right'> Login</a>
+	<a href = 'dvidr'>
+	
+<img src = "/static/img/logo.png" alt = "d/vidr" style = "border: none; " align = 'top' >
 
 	</a>
 	
 <div class = "container">
-	<img src = "split.jpeg" style = "width: 100%;">
+	<img src = "/static/img/split.jpeg" style = "width: 100%;">
 	<div class = "centered"><b>SPLITTING BILLS EASIER WITH FRIENDS</b></div>
 
 

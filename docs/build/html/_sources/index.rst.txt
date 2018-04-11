@@ -12,8 +12,6 @@ Welcome to dvidr's documentation!
    tutorial
    code
 
-   :caption: Contents:
-
 
 
 Indices and tables

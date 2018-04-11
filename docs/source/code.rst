@@ -1,5 +1,5 @@
 Auto Generated Documentation
 ============================
-.. automodule::
+.. automodule:: readimage
 		:members:
 		:undoc-members:

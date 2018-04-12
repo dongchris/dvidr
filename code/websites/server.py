@@ -14,5 +14,4 @@ def user_login():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
-# app.run(host='localhost', port=80)
+    app.run(host = '0.0.0.0',port = 80)

@@ -1,5 +1,7 @@
-Auto Generated Documentation
+API Reference
 ============================
-.. automodule:: readimage
+.. automodule:: pipeline
 		:members:
 		:undoc-members:
+
+

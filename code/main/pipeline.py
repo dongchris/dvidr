@@ -1,3 +1,9 @@
+"""
+Created on April 13, 2018
+
+@author: D/vidr
+"""
+
 import io
 
 from google.cloud import vision

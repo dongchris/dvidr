@@ -5,7 +5,9 @@ from google.cloud.vision import types
 import sys
 import re
 
-app = Flask(__name__)
+import boto
+from boto.s3.key import Key
+
 
 def detect_text(uri):
     """Detects text in the file located in Google Cloud Storage or on the Web.
@@ -22,8 +24,6 @@ def detect_text(uri):
         output.append('"{}"'.format(text.description))
     return "\n".join(output)
 
-import boto
-from boto.s3.key import Key
 
 def readImagefromS3(imageFile):
     """

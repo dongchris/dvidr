@@ -5,6 +5,7 @@ def simple_process(text):
 
     pattern = r'^\d+\s[\d|\D]+'
     result = {}
+    text_list = text_list[4:]
     for index, item in enumerate(text_list):
         if re.findall(pattern, str(item)):
             result[item] = index

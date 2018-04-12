@@ -50,11 +50,14 @@ def readImagefromS3(imageFile):
     
     return url_name
 
-filepath = (readImagefromS3("85c.jpg"))
-
-texts = detect_text(filepath)
 
 def simple_process(text):
+    """
+        This function will take the output from readImagefromS3 function as
+        input and process to get receipt items and payment amounts.
+
+    """
+
     text_list = text.split('\n')
 
     pattern = r'^\d+\s[\d|\D]+'
@@ -68,4 +71,7 @@ def simple_process(text):
         result[key] = "$" + str(text_list[(result[key] + num_items)])
     return result
 
-print(simple_process(texts))
+if __name__ == '__main__':
+    filepath = (readImagefromS3("85c.jpg"))
+    texts = detect_text(filepath)
+    print(simple_process(texts))

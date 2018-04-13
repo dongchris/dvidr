@@ -40,7 +40,7 @@ def readImagefromS3(imageFile):
         Cloud Vision API for processing.
         
     """
-    with open('../../../dvidr.pem') as f:
+    with open('dvidr.pem') as f:
         keys = f.read().split(',')
 
     s3 = boto.connect_s3(

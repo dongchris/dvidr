@@ -1,14 +1,14 @@
 import boto
 from boto.s3.key import Key
 
+
 def readImagefromS3(imageFile):
     """
-        This function will be using the pem file for AWS. 
+        This function will be using the pem file for AWS.
         It will access a public S3 bucket called dvidr with
         the specified image file. The output is a url link
         for the image that will be passed onto the Google
         Cloud Vision API for processing.
-        
     """
     with open('dvidr.pem') as f:
         keys = f.read().split(',')
@@ -23,7 +23,7 @@ def readImagefromS3(imageFile):
     k1.key = imageFile
 
     url_name = k1.generate_url(259200)
-    
+
     return url_name
 
 if __name__ == '__main__':

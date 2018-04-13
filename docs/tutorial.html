@@ -45,7 +45,45 @@
             
   <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>Simply run $python text_processingv1.py in the code directory.</p>
+<dl class="docutils">
+<dt>Database tutorial:</dt>
+<dd><ol class="first last arabic simple">
+<li>Enter RDS console on AWS</li>
+<li>Create PostgreSQL DB instance<ol class="loweralpha">
+<li>Select the region of the database</li>
+<li>Add username and password</li>
+<li>Make database public</li>
+</ol>
+</li>
+<li>Download SQL client - in this case, the choice was SQL Workbench.<ol class="loweralpha">
+<li>Download JDBC driver for PostgreSQL</li>
+</ol>
+</li>
+<li>Change security rules for RDS<ol class="loweralpha">
+<li>Add inbound rule for 0.0.0.0 (allow traffic from anywhere as long as they have the correct username/password)</li>
+</ol>
+</li>
+<li>Connect to PostgreSQL database using the username/password and driver downloaded earlier. JDBC URL comes from the Amazon RDS console</li>
+<li>CREATE tables according to schemas outlined in the Google Drive folder.</li>
+</ol>
+</dd>
+</dl>
+<p>OCR tutorial:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>install google cloud vision python package sudo pip install google-cloud-vision</li>
+<li>enable google api on the google cloud platform<ol class="loweralpha">
+<li>create google cloud platform account</li>
+<li>set up storage</li>
+<li>open vision API</li>
+<li>set up API credentials, download the API key</li>
+<li>put the API key to the bash profile</li>
+</ol>
+</li>
+<li>run the OCR script</li>
+</ol>
+</div></blockquote>
+<p>Simply run $python pipeline.py in the &#8216;code/main/&#8217; directory.</p>
 </div>
 
 

@@ -1,4 +1,4 @@
 Requirements
 ================
 
-Please refer to requirement.txt.
+Please refer to requirement.txt in the repository.

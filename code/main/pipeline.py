@@ -33,14 +33,13 @@ def detect_text(uri):
 
 def readImagefromS3(imageFile):
     """
-        This function will be using the pem file for AWS. 
+        This function will be using the pem file for AWS.
         It will access a public S3 bucket called dvidr with
         the specified image file. The output is a url link
         for the image that will be passed onto the Google
         Cloud Vision API for processing.
-        
     """
-    with open('../../../dvidr.pem') as f:
+    with open('dvidr.pem') as f:
         keys = f.read().split(',')
 
     s3 = boto.connect_s3(
@@ -53,7 +52,6 @@ def readImagefromS3(imageFile):
     k1.key = imageFile
 
     url_name = k1.generate_url(259200)
-    
     return url_name
 
 
@@ -76,6 +74,7 @@ def simple_process(text):
     for key in result.keys():
         result[key] = "$" + str(text_list[(result[key] + num_items)])
     return result
+
 
 if __name__ == '__main__':
     filepath = (readImagefromS3("85c.jpg"))

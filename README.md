@@ -1,10 +1,14 @@
-# Team d/vidr
+# Team d/vidr ![logo](code/static/img/logo.png)
 
 Our product (d / vidr) is a web platform that enables users to take a picture of a receipt (groceries, restaurants, etc), identify the person responsible for each item, and charge the credit cards accordingly. The overall purpose of our product is to organize the receipts of our customers and simplify the process of splitting the bill.
 
 # Contributors
 
 Chris Dong, Qian Li, Jing Song, Jay Xu, Patrick Yang
+
+# Sphinx Documentation
+
+Please refer to our documentation [here](https://msds698.github.io/group-assignment-2-dvidr/)
 
 # Changelog
 

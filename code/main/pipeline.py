@@ -79,4 +79,5 @@ def simple_process(text):
 if __name__ == '__main__':
     filepath = (readImagefromS3("85c.jpg"))
     texts = detect_text(filepath)
-    print(simple_process(texts))
+    output = simple_process(texts)
+    print(output)

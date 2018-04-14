@@ -9,14 +9,15 @@ output = simple_process(texts)
 
 items = [item for item in output.keys()]
 prices = [price for price in output.values()]
-
+texts = zip(items, prices)
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
 
 @app.route("/")
 def homepage():
     """Show homepage"""
-    return render_template('index.html')
+
+    return render_template('index.html',texts = texts)
 
 
 @app.route("/login")

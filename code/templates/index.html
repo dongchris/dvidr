@@ -131,7 +131,9 @@ function readURL(input) {
 </blockquote>
 
 
-
+{% for item, price in texts %} 
+{{item}} &emsp; &emsp; {{price}} <br />
+{% endfor %}
 
 
 </body>

@@ -26,5 +26,6 @@ def readImagefromS3(imageFile):
 
     return url_name
 
+
 if __name__ == '__main__':
     print(readImagefromS3("85c.jpg"))

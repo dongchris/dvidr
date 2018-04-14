@@ -1,24 +1,27 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response, request, redirect, url_for
 
 import os
 from pipeline import *
 
-filepath = (readImagefromS3("85c.jpg"))
-texts = detect_text(filepath)
-output = simple_process(texts)
-
-items = [item for item in output.keys()]
-prices = [price for price in output.values()]
-texts = zip(items, prices)
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
 
 @app.route("/")
-def homepage():
+def index():
     """Show homepage"""
+    return render_template('index.html')
 
+@app.route("/process")
+def process():
+    """Process text upon clicking button"""
+    filepath = (readImagefromS3("85c.jpg"))
+    texts = detect_text(filepath)
+    output = simple_process(texts)
+
+    items = [item for item in output.keys()]
+    prices = [price for price in output.values()]
+    texts = zip(items, prices)
     return render_template('index.html',texts = texts)
-
 
 @app.route("/login")
 def user_login():

@@ -119,6 +119,7 @@ function readURL(input) {
                     .attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
+            var filename = input.files[0];
         }
     }
 
@@ -126,9 +127,16 @@ function readURL(input) {
     </script>
     <br />
 
-    <img id="blah" src="#" height = 500px width = 400px alt = ''/> <br /> <br />
+    <img id="blah" src="#" height = 500px width = 400px alt = ''
+     style = "float:right"/> <br /> <br />
 
-</blockquote>
+<form action="/process">
+    <div class = "upload">
+    <button type="submit" style = "background: #008CBA">Process Image</button>
+    </div>
+</form> <br />
+
+<!-- <a href="/process"><input type=”button” value=”call_flask_funtion”></a> -->
 
 <table cellspacing = '10'>
 
@@ -147,6 +155,7 @@ function readURL(input) {
     
 </table>
 
+</blockquote>
 </body>
 
 </html>

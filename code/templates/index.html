@@ -130,11 +130,22 @@ function readURL(input) {
 
 </blockquote>
 
+<table cellspacing = '10'>
 
 {% for item, price in texts %} 
-{{item}} &emsp; &emsp; {{price}} <br />
-{% endfor %}
+        
+<select>
+    <option value = "chris">Chris</option>
+    <option value = "qian">Qian</option>
+    <option value = "jing">Jing</option>
+    <option value = "jay">Jay</option>
+    <option value = "patrick">Patrick</option>
+</select>
 
+        &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br />
+{% endfor %}
+    
+</table>
 
 </body>
 

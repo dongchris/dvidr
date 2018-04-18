@@ -29,7 +29,7 @@ def detect_text(uri):
 
     output = []
     for text in texts:
-        output.append('"{}"'.format(text.description))
+        output.append('"{}"'.format(text.description.encode('ascii', 'ignore').decode('ascii')))
     return "\n".join(output)
 
 

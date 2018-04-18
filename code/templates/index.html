@@ -85,7 +85,10 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
                 if (err) {
                     results.innerHTML = 'ERROR: ' + err;
                 } else {
-                    listObjs(); // this function will list all the files which has been uploaded
+                    listObjs();
+                    console.log(file.name);
+                    document.getElementById('filename').value= file.name;
+                    document.forms["myForm"].submit(); // this function will list all the files which has been uploaded
                     //here you can also add your code to update your database(MySQL, firebase whatever you are using)
                 }
             });
@@ -127,9 +130,13 @@ function readURL(input) {
 
 
 
-
-
     </script>
+
+
+<form action = "/uploader" method="POST" name='myForm'>
+        <input id='filename' name='filename' type='hidden' />
+    </form>
+
 
     <img id="blah" src="#" height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />

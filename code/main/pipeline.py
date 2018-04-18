@@ -29,11 +29,8 @@ def detect_text(uri):
     response = client.text_detection(image=image)
     texts = response.text_annotations
 
-    output = []
-    for text in texts:
-        output.append('"{}"'.format(text.description.encode('ascii',
-                                    'ignore').decode('ascii')))
-    return "\n".join(output)
+    return(texts, texts[0].description.encode('ascii',
+                                              'ignore').decode('ascii'))
 
 
 def readImagefromS3(imageFile):
@@ -83,6 +80,7 @@ def simple_process(text):
 
 if __name__ == '__main__':
     filepath = (readImagefromS3("85c.jpg"))
-    texts = detect_text(filepath)
+    texts = detect_text(filepath)[1]
+    print(texts)
     output = simple_process(texts)
     print(output)

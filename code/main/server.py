@@ -28,7 +28,7 @@ def get_filename():
 def process():
     """Process text upon clicking button"""
     filepath = (readImagefromS3(filename))
-    texts = detect_text(filepath)
+    texts = detect_text(filepath)[1]
     output = simple_process(texts)
     global items
     items = [item for item in output.keys()]

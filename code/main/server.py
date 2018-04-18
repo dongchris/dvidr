@@ -1,27 +1,15 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
 import os
 from pipeline import *
-
 filename = None
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
+
 
 @app.route("/")
 def index():
     """Show homepage"""
     return render_template('index.html')
-
-@app.route("/uploader", methods=['POST', 'GET'])
-def get_filename():
-    print(request)
-    global filename
-    if request.method == 'POST':
-        filename = request.form['filename']
-        print('upload ', filename)
-        return render_template('index.html')
-    else:
-        return render_template('index.html')
-
 
 @app.route("/uploader", methods=['POST', 'GET'])
 def get_filename():

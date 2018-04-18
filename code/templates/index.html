@@ -13,13 +13,14 @@
 <meta charset=utf-8 />
 
 <style>
-  article, aside, figure, footer, header, hgroup, 
+  article, aside, figure, footer, header, hgroup,
   menu, nav, section { display: block; }
 </style>
 
 </head>
 
 <body style = "background-image: none">
+
 
     <a href = 'login' align = 'right'> Login</a>
     <a href = ''>
@@ -44,7 +45,7 @@ Step 3: Assign items to friends.<br />
 Step 4: Wait for Stripe to charge credit cards accordingly.<br /><br />
 
 The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simply upload the image by clicking the button below.<br /><br /><br />
-    
+
 
 <input type="file" id="file-chooser" onchange="readURL(this);"/>
 <div class = "upload">
@@ -90,11 +91,15 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
                     document.getElementById('filename').value= file.name;
                     document.forms["myForm"].submit(); // this function will list all the files which has been uploaded
                     //here you can also add your code to update your database(MySQL, firebase whatever you are using)
+                    console.log(file.name);
+                    document.getElementById('filename').value= file.name;
+                    document.forms["myForm"].submit();
                 }
             });
         } else {
             results.innerHTML = 'Nothing to upload.';
         }
+
     }, false);
     function listObjs() {
         console.log("TEST");
@@ -132,10 +137,11 @@ function readURL(input) {
 
     </script>
 
-
-<form action = "/uploader" method="POST" name='myForm'>
+    <form action = "/uploader" method="POST" name='myForm'>
         <input id='filename' name='filename' type='hidden' />
     </form>
+
+    <br />
 
 
     <img id="blah" src="#" height = 500px width = 400px alt = ''
@@ -151,17 +157,20 @@ function readURL(input) {
 
 <br />
 <table cellspacing = '10'>
-{% for item, price in texts %} 
+
+
+{% for item, price in texts %}
 
   <form id="form1" action="/split" method="POST" enctype="multipart/form-data">
     <select id="mySelect" name = "payers">
-      <option value="Chris">Chris</option>
+      <option value="C">Chris</option>
       <option value="Qian">Qian</option>
       <option value="Jing">Jing</option>
       <option value="Jay">Jay</option>
       <option value="Patrick">Patrick</option>
     </select>
         &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br />
+
 <br />
 
     

@@ -1,7 +1,7 @@
-# Team d/vidr 
+# Team dvidr 
 <img align = "right" src = "code/static/img/logo.png">
 
-Our product (d / vidr) is a web platform that enables users to take a picture of a receipt (groceries, restaurants, etc), identify the person responsible for each item, and charge the credit cards accordingly. The overall purpose of our product is to organize the receipts of our customers and simplify the process of splitting the bill.
+Our product (dvidr) is a web platform that enables users to take a picture of a receipt (groceries, restaurants, etc), identify the person responsible for each item, and charge the credit cards accordingly. The overall purpose of our product is to organize the receipts of our customers and simplify the process of splitting the bill.
 
 # Contributors
 
@@ -12,6 +12,12 @@ Chris Dong, Qian Li, Jing Song, Jay Xu, Patrick Yang
 Please refer to our documentation [here](https://msds698.github.io/group-assignment-2-dvidr/)
 
 # Changelog
+
+### 0.0.2 - 2018-4-17
+#### Added
+- Text processing / split items buttons
+- Dropdown function
+- Calculation and display of prices according to dropdown values
 
 ### 0.0.1 - 2018-4-13
 #### Added

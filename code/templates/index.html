@@ -21,16 +21,17 @@
 
 <body style = "background-image: none">
 
-	<a href = 'login' align = 'right'> Login</a>
-	<a href = ''>
 
+    <a href = 'login' align = 'right'> Login</a>
+    <a href = ''>
+    
 <img src = "/static/img/logo.png" alt = "d/vidr" style = "border: none; " align = 'top' >
 
-	</a>
-
+    </a>
+    
 <div class = "container">
-	<img src = "/static/img/split.jpeg" style = "width: 100%;">
-	<div class = "centered"><b>SPLITTING BILLS EASIER WITH FRIENDS</b></div>
+    <img src = "/static/img/split.jpeg" style = "width: 100%;">
+    <div class = "centered"><b><br />SPLITTING BILLS EASIER WITH FRIENDS</b></div>
 
 
 <h1> How does it work?</h1>
@@ -39,10 +40,12 @@
 <blockquote>
 
 Step 1: Upload a receipt image.<br />
-Step 2: Assign items to friends.<br />
-Step 3: Wait for Stripe to charge credit cards accordingly.<br /><br />
+Step 2: Process the text. <br />
+Step 3: Assign items to friends.<br />
+Step 4: Wait for Stripe to charge credit cards accordingly.<br /><br />
 
 The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simply upload the image by clicking the button below.<br /><br /><br />
+
 
 <input type="file" id="file-chooser" onchange="readURL(this);"/>
 <div class = "upload">
@@ -83,7 +86,10 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
                 if (err) {
                     results.innerHTML = 'ERROR: ' + err;
                 } else {
-                    listObjs(); // this function will list all the files which has been uploaded
+                    listObjs();
+                    console.log(file.name);
+                    document.getElementById('filename').value= file.name;
+                    document.forms["myForm"].submit(); // this function will list all the files which has been uploaded
                     //here you can also add your code to update your database(MySQL, firebase whatever you are using)
                     console.log(file.name);
                     document.getElementById('filename').value= file.name;
@@ -113,7 +119,7 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
             }
         });
     }
-    listObjs();
+    // listObjs();
 
 function readURL(input) {
         if (input.files && input.files[0]) {
@@ -127,6 +133,8 @@ function readURL(input) {
         }
     }
 
+
+
     </script>
 
     <form action = "/uploader" method="POST" name='myForm'>
@@ -134,6 +142,7 @@ function readURL(input) {
     </form>
 
     <br />
+
 
     <img id="blah" src="#" height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
@@ -146,24 +155,71 @@ function readURL(input) {
     </div>
 </form> <br />
 
+<br />
 <table cellspacing = '10'>
+
 
 {% for item, price in texts %}
 
-<select>
-    <option value = "chris">Chris</option>
-    <option value = "qian">Qian</option>
-    <option value = "jing">Jing</option>
-    <option value = "jay">Jay</option>
-    <option value = "patrick">Patrick</option>
-</select>
-
+  <form id="form1" action="/split" method="POST" enctype="multipart/form-data">
+    <select id="mySelect" name = "payers">
+      <option value="C">Chris</option>
+      <option value="Qian">Qian</option>
+      <option value="Jing">Jing</option>
+      <option value="Jay">Jay</option>
+      <option value="Patrick">Patrick</option>
+    </select>
         &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br />
-{% endfor %}
 
+<br />
+
+    
+
+{% endfor %}
 </table>
 
+<div class = "upload">
+
+
+<button type="submit" value = "Submit" style = "background: #922B21">Split Items
+</button>
+
+<br />
+
+</div>
+
+  </form>
+  
+  <div id="result">
+    
+    {% if payer_list is defined %}
+    <br /> You have selected: {{ payer_list }}
+    {% endif %}
+
+  </div>
+
+{% for payer, price in combine %}
+<p style = "padding:0px 25px 0px 0px;">
+{{payer}} &emsp; {{price}} <br />
+</p>
+{% endfor %}
+
+
 </blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>

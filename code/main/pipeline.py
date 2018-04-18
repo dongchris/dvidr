@@ -15,7 +15,9 @@ import boto
 from boto.s3.key import Key
 
 # import os
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ec2-user/group-assignment-2-dvidr/code/main/apikey.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
+# "/home/ec2-user/group-assignment-2-dvidr/code/main/apikey.json"
+
 
 def detect_text(uri):
     """Detects text in the file located in Google Cloud Storage or on the Web.
@@ -29,7 +31,8 @@ def detect_text(uri):
 
     output = []
     for text in texts:
-        output.append('"{}"'.format(text.description.encode('ascii', 'ignore').decode('ascii')))
+        output.append('"{}"'.format(text.description.encode('ascii',
+                                    'ignore').decode('ascii')))
     return "\n".join(output)
 
 

@@ -11,6 +11,7 @@ def index():
     """Show homepage"""
     return render_template('index.html')
 
+
 @app.route("/uploader", methods=['POST', 'GET'])
 def get_filename():
     print(request)
@@ -47,18 +48,16 @@ def user_login():
 
 @app.route('/split', methods=['GET', 'POST'])
 def split():
-    
     if request.method == "POST":
         payer_list = request.form.getlist("payers", None)
         import numpy as np
-        if payer_list!=None:
+        if payer_list is not None:
             d = dict()
             for i in range(len(items)):
                 if payer_list[i] in d:
                     d[payer_list[i]].append(prices2[i])
                 else:
                     d[payer_list[i]] = [prices2[i]]
-            
             payer = []
             totalprice = []
             for key, val in d.items():
@@ -67,7 +66,8 @@ def split():
 
             combine = zip(payer, totalprice)
 
-            return render_template("index.html", payer_list = payer_list, combine = combine)
+            return render_template("index.html",
+                                   payer_list=payer_list, combine=combine)
     return render_template("index.html")
 
 

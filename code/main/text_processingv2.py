@@ -29,7 +29,8 @@ def simple_process(text, n):
 
     result = {}
     for sub_group in stack:
-        if len(sub_group) < n: continue
+        if len(sub_group) < n:
+            continue
         for j in sub_group[:n]:
             result[text_list[j - n]] = text_list[j]
 

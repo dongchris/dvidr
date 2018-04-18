@@ -2,9 +2,10 @@ from flask import Flask, render_template, Response, request, redirect, url_for
 import os
 from pipeline import *
 
+filename = None
+
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
-
 
 @app.route("/")
 def index():
@@ -12,10 +13,23 @@ def index():
     return render_template('index.html')
 
 
+@app.route("/uploader", methods=['POST', 'GET'])
+def get_filename():
+    print(request)
+    global filename
+    if request.method == 'POST':
+        filename = request.form['filename']
+        print('upload ', filename)
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
+
+
 @app.route("/process")
 def process():
     """Process text upon clicking button"""
-    filepath = (readImagefromS3("85c.jpg"))
+    print('process ', filename)
+    filepath = (readImagefromS3(filename))
     texts = detect_text(filepath)
     output = simple_process(texts)
 

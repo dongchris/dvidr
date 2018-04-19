@@ -16,6 +16,7 @@ def index():
 
 @app.route("/uploader", methods=['POST', 'GET'])
 def get_filename():
+    """Retrieve file name after uploading image"""
     print(request)
     global filename
     if request.method == 'POST':
@@ -62,6 +63,11 @@ def user_login():
 
 @app.route('/split', methods=['GET', 'POST'])
 def split():
+    """
+    After identifying the payers responsible for each item, this
+    function will allocate the prices for each payer. It will then
+    print out the final prices for each user.
+    """
     if request.method == "POST":
         payer_list = request.form.getlist("payers", None)
         import numpy as np

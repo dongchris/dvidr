@@ -2,6 +2,7 @@ import boto
 from boto.s3.key import Key
 import sys
 
+
 def readImagefromS3(imageFile):
     """
         This function will be using the pem file for AWS.

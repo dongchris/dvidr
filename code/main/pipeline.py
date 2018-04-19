@@ -4,22 +4,23 @@ Created on April 13, 2018
 @author: D/vidr
 """
 
-import io
 
+from boto.s3.key import Key
 from google.cloud import vision
 from google.cloud.vision import types
-import sys
-import re
-
-import boto
-from boto.s3.key import Key
-
-import skimage.io as skio
-import cv2
-import base64
 from io import BytesIO
 from PIL import Image
+import skimage.io as skio
+
+import base64
+import boto
+import cv2
+import io
 import numpy as np
+import re
+import sys
+
+from text_processingv2 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
@@ -37,7 +38,7 @@ def detect_text(uri):
     texts = response.text_annotations
 
     return (texts, texts[0].description.encode('ascii',
-                                              'ignore').decode('ascii'))
+                                               'ignore').decode('ascii'))
 
 
 def readImagefromS3(imageFile):
@@ -64,35 +65,15 @@ def readImagefromS3(imageFile):
     return url_name
 
 
-def simple_process(text):
-    """
-        This function will take the output from readImagefromS3 function as
-        input and process to get receipt items and payment amounts.
-
-    """
-
-    text_list = text.split('\n')
-
-    pattern = r'^\d+\s[\d|\D]+'
-    result = {}
-    text_list = text_list[4:]
-    for index, item in enumerate(text_list):
-        if re.findall(pattern, str(item)):
-            result[item] = index
-    num_items = len(result.keys())
-    for key in result.keys():
-        result[key] = "$" + str(text_list[(result[key] + num_items)])
-    return result
-
-
 def bounding_box(url, texts):
     """add bounding box to image, return image numpy array
     """
     img = skio.imread(url)
     for text in texts[1:]:  # 0th bounding box is whole picture
         vertices = [(vertex.x, vertex.y)
-                for vertex in text.bounding_poly.vertices]   # get coordinates
-        cv2.polylines(img, [np.array(vertices)], True, (0,255,0), 2)  # plot line
+        for vertex in text.bounding_poly.vertices]:  # get coordinates
+                cv2.polylines(img, [np.array(vertices)],
+                              True, (0, 255, 0), 2)  # plot line
 
     return img
 
@@ -109,8 +90,8 @@ def arr2str(img_arr):
 
 
 if __name__ == '__main__':
-    filepath = (readImagefromS3("85c.jpg"))
+    filepath = (readImagefromS3("udon.jpg"))
     texts = detect_text(filepath)[1]
     print(texts)
-    output = simple_process(texts)
+    output = simple_process(texts, 5)
     print(output)

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
 import os
 from pipeline import *
+from text_processingv2 import simple_process
+
 filename = None
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
@@ -40,7 +42,7 @@ def process():
     print(img_str[:30] + "..." + img_str[-20:])
 
     # process text
-    output = simple_process(texts[1])
+    output = simple_process(texts[1], n=5)
     global items
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]
@@ -48,7 +50,7 @@ def process():
     global prices2
     prices2 = [float(price[1:]) for price in prices]
 
-    return render_template('index.html', texts=texts, img_str = img_str)
+    return render_template('index.html', texts=texts, img_str=img_str)
 
 
 @app.route("/login")

@@ -1,6 +1,6 @@
 import boto
 from boto.s3.key import Key
-
+import sys
 
 def readImagefromS3(imageFile):
     """
@@ -10,7 +10,7 @@ def readImagefromS3(imageFile):
         for the image that will be passed onto the Google
         Cloud Vision API for processing.
     """
-    with open('dvidr.pem') as f:
+    with open('../../../dvidr.pem') as f:
         keys = f.read().split(',')
 
     s3 = boto.connect_s3(
@@ -28,4 +28,4 @@ def readImagefromS3(imageFile):
 
 
 if __name__ == '__main__':
-    print(readImagefromS3("85c.jpg"))
+    print(readImagefromS3(sys.argv[1]))

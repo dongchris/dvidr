@@ -48,7 +48,8 @@ def process():
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]
     global prices2
-    prices2 = [float(price[1:]) for price in prices]
+    prices2 = [float(price[1:]) if price[0] == '$' else
+               float(price) for price in prices]
     prices2 = [prices2[i] * -1 if items[i].lower() == 'discount'
                else prices2[i] for i in range(len(prices2))]
     texts = zip(items, prices)

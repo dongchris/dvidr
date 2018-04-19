@@ -15,6 +15,32 @@
 <style>
   article, aside, figure, footer, header, hgroup,
   menu, nav, section { display: block; }
+
+
+ul.leaders {
+    max-width: 40em;
+    padding: 0;
+    overflow-x: hidden;
+    list-style: none}
+ul.leaders li:before {
+    float: left;
+    width: 0;
+    white-space: nowrap;
+    content:
+ ". . . . . . . . . . . . . . . . . . . . "
+ ". . . . . . . . . . . . . . . . . . . . "
+ ". . . . . . . . . . . . . . . . . . . . "
+ ". . . . . . . . . . . . . . . . . . . . "}
+ul.leaders span:first-child {
+    padding-right: 0.33em;
+    background: white}
+ul.leaders span + span {
+    float: right;
+    padding-left: 0.33em;
+    background: white}
+
+
+
 </style>
 
 </head>
@@ -198,11 +224,24 @@ function readURL(input) {
 
   </div>
 
-{% for payer, price in combine %}
+<!-- {% for payer, price in combine %}
 <p style = "padding:0px 25px 0px 0px;">
 {{payer}} &emsp; {{price}} <br />
-</p>
+</p> -->
+
+<!-- {% endfor %} -->
+
+<ul class=leaders>
+
+{% for payer, price in combine %}
+
+<li><span>{{payer}}</span>
+ <span>{{price}}</span>
+
 {% endfor %}
+
+</ul>
+
 
 
 </blockquote>

@@ -46,10 +46,11 @@ def process():
     global items
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]
-    texts = zip(items, prices)
     global prices2
     prices2 = [float(price[1:]) for price in prices]
-
+    prices2 = [prices2[i] * -1 if items[i].lower() == 'discount'
+               else prices2[i] for i in range(len(prices2))]
+    texts = zip(items, prices)
     return render_template('index.html', texts=texts, img_str=img_str)
 
 
@@ -76,7 +77,6 @@ def split():
             for key, val in d.items():
                 payer.append(key)
                 totalprice.append('%.2f' % np.sum(val))
-
             combine = zip(payer, totalprice)
 
             return render_template("index.html",

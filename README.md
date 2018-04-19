@@ -18,6 +18,9 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - Text processing / split items buttons
 - Dropdown function
 - Calculation and display of prices according to dropdown values
+- More robust text processing algorithm
+- Display of bounding boxes on image
+- Parsing of discounts
 
 ### 0.0.1 - 2018-4-13
 #### Added

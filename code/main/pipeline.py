@@ -70,10 +70,10 @@ def bounding_box(url, texts):
     """
     img = skio.imread(url)
     for text in texts[1:]:  # 0th bounding box is whole picture
-        vertices = [(vertex.x, vertex.y)
-        for vertex in text.bounding_poly.vertices]:  # get coordinates
-                cv2.polylines(img, [np.array(vertices)],
-                              True, (0, 255, 0), 2)  # plot line
+        vertices = [(vertex.x, vertex.y)  # get coordinates
+                    for vertex in text.bounding_poly.vertices]
+        cv2.polylines(img, [np.array(vertices)],
+                      True, (0, 255, 0), 2)  # plot line
 
     return img
 

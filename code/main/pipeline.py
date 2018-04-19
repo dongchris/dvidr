@@ -14,6 +14,13 @@ import re
 import boto
 from boto.s3.key import Key
 
+import skimage.io as skio
+import cv2
+import base64
+from io import BytesIO
+from PIL import Image
+import numpy as np
+
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
 # "/home/ec2-user/group-assignment-2-dvidr/code/main/apikey.json"
@@ -29,7 +36,7 @@ def detect_text(uri):
     response = client.text_detection(image=image)
     texts = response.text_annotations
 
-    return(texts, texts[0].description.encode('ascii',
+    return (texts, texts[0].description.encode('ascii',
                                               'ignore').decode('ascii'))
 
 
@@ -76,6 +83,29 @@ def simple_process(text):
     for key in result.keys():
         result[key] = "$" + str(text_list[(result[key] + num_items)])
     return result
+
+
+def bounding_box(url, texts):
+    """add bounding box to image, return image numpy array
+    """
+    img = skio.imread(url)
+    for text in texts[1:]:  # 0th bounding box is whole picture
+        vertices = [(vertex.x, vertex.y)
+                for vertex in text.bounding_poly.vertices]   # get coordinates
+        cv2.polylines(img, [np.array(vertices)], True, (0,255,0), 2)  # plot line
+
+    return img
+
+
+def arr2str(img_arr):
+    """convert a image from numpy array to base64 output
+    """
+    pil_img = Image.fromarray(img_arr)
+    buff = BytesIO()
+    pil_img.save(buff, format="JPEG")
+    new_image_string = base64.b64encode(buff.getvalue()).decode("utf-8")
+    new_image_string = "data:image/jpg;base64," + new_image_string
+    return new_image_string
 
 
 if __name__ == '__main__':

@@ -26,10 +26,21 @@ def get_filename():
 
 @app.route("/process")
 def process():
-    """Process text upon clicking button"""
+    """
+    Process text upon clicking button;
+    Add bounding box to image
+    """
+    # OCR
     filepath = (readImagefromS3(filename))
-    texts = detect_text(filepath)[1]
-    output = simple_process(texts)
+    texts = detect_text(filepath)
+
+    # add bounding box
+    img_arr = bounding_box(filepath, texts[0])
+    img_str = arr2str(img_arr)
+    print(img_str[:30] + "..." + img_str[-20:])
+
+    # process text
+    output = simple_process(texts[1])
     global items
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]
@@ -37,7 +48,7 @@ def process():
     global prices2
     prices2 = [float(price[1:]) for price in prices]
 
-    return render_template('index.html', texts=texts)
+    return render_template('index.html', texts=texts, img_str = img_str)
 
 
 @app.route("/login")

@@ -24,11 +24,11 @@
 
     <a href = 'login' align = 'right'> Login</a>
     <a href = ''>
-    
+
 <img src = "/static/img/logo.png" alt = "d/vidr" style = "border: none; " align = 'top' >
 
     </a>
-    
+
 <div class = "container">
     <img src = "/static/img/split.jpeg" style = "width: 100%;">
     <div class = "centered"><b><br />SPLITTING BILLS EASIER WITH FRIENDS</b></div>
@@ -86,14 +86,11 @@ The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simpl
                 if (err) {
                     results.innerHTML = 'ERROR: ' + err;
                 } else {
-                    listObjs();
-                    console.log(file.name);
-                    document.getElementById('filename').value= file.name;
-                    document.forms["myForm"].submit(); // this function will list all the files which has been uploaded
+                    // listObjs();// this function will list all the files which has been uploaded
                     //here you can also add your code to update your database(MySQL, firebase whatever you are using)
                     console.log(file.name);
                     document.getElementById('filename').value= file.name;
-                    document.forms["myForm"].submit();
+                    document.forms["myForm"].submit();   // send image name to server
                 }
             });
         } else {
@@ -147,6 +144,9 @@ function readURL(input) {
     <img id="blah" src="#" height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
 
+    <img src={{img_str}} height = 500px width = 400px alt = ''
+     style = "float:right"/> <br /> <br />
+
 <form action="/process">
     <div class = "upload">
     <button type="submit" style = "background: #008CBA">Process Image
@@ -173,7 +173,7 @@ function readURL(input) {
 
 <br />
 
-    
+
 
 {% endfor %}
 </table>
@@ -189,9 +189,9 @@ function readURL(input) {
 </div>
 
   </form>
-  
+
   <div id="result">
-    
+
     {% if payer_list is defined %}
     <br /> You have selected: {{ payer_list }}
     {% endif %}

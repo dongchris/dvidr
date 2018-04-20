@@ -1,0 +1,47 @@
+Tutorial
+================
+
+Database tutorial:
+    (1) Enter RDS console on AWS \newline
+
+    (2) Create PostgreSQL DB instance \newline
+
+        (a) Select the region of the database \newline
+
+        (b) Add username and password  \newline
+
+        (c) Make database public  \newline
+
+    (3) Download SQL client - in this case, the choice was SQL Workbench. \newline
+
+        (a) Download JDBC driver for PostgreSQL  \newline
+
+    (4) Change security rules for RDS \newline
+
+        (a) Add inbound rule for 0.0.0.0 (allow traffic from anywhere as long as they have the correct username/password)  \newline
+
+    (5) Connect to PostgreSQL database using the username/password and driver downloaded earlier. JDBC URL comes from the Amazon RDS console \newline
+  
+    (6) CREATE tables according to schemas outlined in the Google Drive folder. \newline
+
+OCR tutorial: \newline
+   
+    (1) install google cloud vision python package sudo pip install google-cloud-vision \newline
+
+    (2) enable google api on the google cloud platform \newline
+        
+	(a) create google cloud platform account \newline
+        
+	(b) set up storage \newline
+        
+	(c) open vision API  \newline
+        
+	(d) set up API credentials, download the API key  \newline
+
+        (e) put the API key to the bash profile  \newline
+
+    (3) run the OCR script  \newline
+
+Simply run $python pipeline.py in the 'code/main/' directory. \newline
+
+

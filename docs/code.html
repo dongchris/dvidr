@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Reference &#8212; dvidr  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pipeline">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-pipeline" title="Permalink to this headline">¶</a></h1>
+<p>Created on April 13, 2018</p>
+<p>&#64;author: D/vidr</p>
+<dl class="function">
+<dt id="pipeline.arr2str">
+<code class="descclassname">pipeline.</code><code class="descname">arr2str</code><span class="sig-paren">(</span><em>img_arr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pipeline.html#arr2str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pipeline.arr2str" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert a image from numpy array to base64 output</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pipeline.bounding_box">
+<code class="descclassname">pipeline.</code><code class="descname">bounding_box</code><span class="sig-paren">(</span><em>url</em>, <em>texts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pipeline.html#bounding_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pipeline.bounding_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>add bounding box to image, return image numpy array</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pipeline.detect_text">
+<code class="descclassname">pipeline.</code><code class="descname">detect_text</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pipeline.html#detect_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pipeline.detect_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detects text in the file located in Google Cloud Storage or on the Web.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pipeline.readImagefromS3">
+<code class="descclassname">pipeline.</code><code class="descname">readImagefromS3</code><span class="sig-paren">(</span><em>imageFile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pipeline.html#readImagefromS3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pipeline.readImagefromS3" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will be using the pem file for AWS.
+It will access a public S3 bucket called dvidr with
+the specified image file. The output is a url link
+for the image that will be passed onto the Google
+Cloud Vision API for processing.</p>
+</dd></dl>
+
+<span class="target" id="module-server"></span><dl class="function">
+<dt id="server.get_filename">
+<code class="descclassname">server.</code><code class="descname">get_filename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/server.html#get_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#server.get_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve file name after uploading image</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="server.index">
+<code class="descclassname">server.</code><code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/server.html#index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#server.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show homepage</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="server.process">
+<code class="descclassname">server.</code><code class="descname">process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/server.html#process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#server.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process text upon clicking button;
+Add bounding box to image</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="server.split">
+<code class="descclassname">server.</code><code class="descname">split</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/server.html#split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#server.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>After identifying the payers responsible for each item, this
+function will allocate the prices for each payer. It will then
+print out the final prices for each user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="server.user_login">
+<code class="descclassname">server.</code><code class="descname">user_login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/server.html#user_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#server.user_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login / Register page &#8211; not yet implemented</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, dvidr.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/code.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

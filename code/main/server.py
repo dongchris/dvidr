@@ -1,11 +1,46 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
+from flask_login import (current_user, LoginManager, login_required,
+                         login_user, logout_user, UserMixin)
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 import os
 from pipeline import *
+<<<<<<< HEAD
+
+=======
 from text_processingv2 import simple_process
+>>>>>>> refs/remotes/origin/master
 
 filename = None
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
+db_pwd = open('db_login_info.txt', 'r').read().splitlines()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%s:%s@dvidrdbinstance.\
+cjdc2sny2qtf.us-west-2.rds.amazonaws.com:5432/dvidrdb' % (db_pwd[0], db_pwd[1])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+
+
+class Users(db.Model, UserMixin):
+    id = db.Column(db.String(150), primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    pay_info = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(150), nullable=False)
+
+    def __init__(self, username, email, pay_info, password):
+        self.id = hash(email)
+        self.username = username
+        self.email = email
+        self.pay_info = pay_info
+        self.set_password(password)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 @app.route("/")
@@ -58,8 +93,49 @@ def process():
 
 @app.route("/login")
 def user_login():
-    """Login / Register page -- not yet implemented"""
+    """Display login page"""
     return render_template('login.html')
+
+
+@app.route("/login", methods=['POST'])
+def user_login_post():
+    """Process the login request"""
+    print(request.form)
+    username = request.form['username']
+    password = request.form['password']
+    user = Users.query.filter_by(username=username).first()
+
+    # Login and validate the user.
+    if user is not None and user.check_password(password):
+        login_user(user)
+        # return redirect(url_for('secret_page'))
+        return '<h1> Logged in : ' + username + '</h1>'
+    else:
+        return '<h1> Invalid username and password combination! </h1>'
+
+
+@app.route('/register')
+def register():
+    """Display the register page"""
+    return render_template('register.html')
+
+
+@app.route('/register', methods=['POST'])
+def register_post():
+    """Process the register request"""
+    username = request.form['username']
+    password = request.form['password']
+    email_id = request.form['email id']
+    venmo_url = request.form['venmo url']
+
+    user_count = Users.query.filter_by(username=username).count()
+    if (user_count > 0):
+        return "<h1> Error - Existing user : " + username + '</h1>'
+
+    user = Users(username, email_id, venmo_url, password)
+    db.session.add(user)
+    db.session.commit()
+    return '<h1> Registered : ' + username + '</h1>'
 
 
 @app.route('/split', methods=['GET', 'POST'])
@@ -92,5 +168,10 @@ def split():
 
 
 if __name__ == '__main__':
+    # login_manager needs to be initiated before running the app
+    login_manager.init_app(app)
+    # flask-login uses sessions which require a secret Key
+    app.secret_key = os.urandom(24)
+
     app.debug = True
     app.run(host='0.0.0.0', port=8080)

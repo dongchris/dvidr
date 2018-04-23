@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html lang = "en-US">
+<html lang="en">
 
-<head>
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
 
-<link rel = "stylesheet" type ="text/css" href = "{{ url_for('static',filename='styles/homepage.css') }}">
+	    <title>dvidr</title>
+	    <!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300' rel='stylesheet' type='text/css'>
+	    <!-- Flaticon CSS -->
+	    <link href="/static/fonts/flaticon/flaticon.css" rel="stylesheet">
+	    <!-- font-awesome CSS -->
+	    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+	    <!-- Offcanvas CSS -->
+	    <link href="/static/css/hippo-off-canvas.css" rel="stylesheet">
+	    <!-- animate CSS -->
+	    <link href="/static/css/animate.css" rel="stylesheet">
+	    <!-- owl.carousel CSS -->
+	    <link href="/static/css/owl.theme.css" rel="stylesheet">
+	    <link href="/static/css/owl.carousel.css" rel="stylesheet">
+	    <!-- Bootstrap Core CSS -->
+	    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Custom CSS -->
+	    <link href="/static/css/style.css" rel="stylesheet">
+	    <!-- Responsive CSS -->
+	    <link href="/static/css/responsive.css" rel="stylesheet">
+
+	    <script src="/static/js/vendor/modernizr-2.8.1.min.js"></script>
+	    <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+		    <script src="/static/js/vendor/html5shim.js"></script>
+		    <script src="/static/js/vendor/respond.min.js"></script>
+	    <![endif]-->
+<link rel = "stylesheet" type ="text/css" href = "{{ url_for('static',filename='css/homepage.css') }}">
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
 <title>d/vidr</title>
 
@@ -42,43 +75,216 @@ ul.leaders span + span {
 
 
 </style>
-
-</head>
-
-<body style = "background-image: none">
+	    
+	</head>
 
 
-    
-<a href = ''>
-<img src = "/static/img/logo.png" alt = "d/vidr" style = "border: none; " align = 'top' ></a>
+<body id="page-top" data-spy="scroll"  data-target=".navbar">
 
-<a href = 'login'><img src = "/static/img/login.png" alt = "login" 
-    style = "border: none; " align = 'right' height = 70 width = 70></a>
-<!-- <a href = 'login' style = "padding-left:15px; float:right; text-align:right;"> Login</a> -->
-    
+  <div id="st-container" class="st-container">
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="st-content-inner">
 
-<div class = "container">
-    <img src = "/static/img/split.jpeg" style = "width: 100%;">
-    <div class = "centered"><b><br />SPLITTING BILLS EASIER WITH FRIENDS</b></div>
+			  	<header class="header">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container">
+							<div class="navbar-header">
+		                        <button type="button" class="navbar-toggle collapsed" >
+		                          <span class="sr-only">Toggle navigation</span>
+		                          <i class="fa fa-bars"></i>
+		                        </button>
+							    <!-- offcanvas-trigger-effects -->
+								<h1 class="logo"><a class="navbar-brand" href="">
+								<!-- 	<img src="/static/img/logo.png" alt=""
+									height = 80px width = 110px 
+									style = "border: 0 ;align:'left';
+									padding-left: 0">
+ -->
+<img src="/static/img/logo.png" alt="" height = 100 width = 200> 
+								</a></h1>
+							</div>
+<br /><br />
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse navbar-collapse">
+								<ul class="nav navbar-nav navbar-right">
+									<li><a class="page-scroll" href="#home">Home</a></li>
+									<li><a class="page-scroll" href="#services">Steps</a></li>
+									<li><a class="page-scroll" href="#start">Start</a></li>
+									<li><a class="page-scroll" href="register">Register</a></li>
+									<li><a class="page-scroll" href="login">Login</a></li>
+									
+								</ul>
+
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container -->
+					</nav>
+				</header>
 
 
-<h1> How does it work?</h1>
+
+                <!-- slider content -->
+                <div id="x-corp-carousel" class="carousel slide hero-slide" data-ride="carousel">
+				    <!-- Indicators -->
+				    <ol class="carousel-indicators">
+				        <li data-target="#x-corp-carousel" data-slide-to="0" class="active"></li>
+				        <li data-target="#x-corp-carousel" data-slide-to="1"></li>
+				    </ol>
+
+				    <!-- Wrapper for slides -->
+				    <div class="carousel-inner" role="listbox">
+				        <div class="item active">
+				            <img src="/static/img/split.jpeg" alt="Hero Slide">
+				            <!--Slide Image-->
+
+				            <div class="container">
+				                <div class="carousel-caption">
+				                    <h1 class="animated lightSpeedIn">Splitting Bills Easier with Friends</h1>
+
+				                    <p class="lead animated lightSpeedIn">
+				                    	Using optical character recognition (OCR) to detect text and charge items according to credit cards.
+				                    </p>
+
+				                    <a class="btn btn-default animated lightSpeedIn" href="#services">Get Started</a>
+				                </div>
+				                <!--.carousel-caption-->
+				            </div>
+				            <!--.container-->
+				        </div>
+				        <!--.item-->
+
+				        <div class="item">
+				            <img src="/static/img/split.jpeg" alt="Hero Slide">
+				            <!--Slide Image-->
+
+				            <div class="container">
+				                <div class="carousel-caption">
+
+				                    <h1 class="animated bounceIn">Storing your receipts</h1>
+
+				                    <p class="lead animated bounceIn">Keep track of all your receipts with our secure storage system for free!</p>
+				                    <a class="btn btn-default animated bounceIn" href="login">Login Now!</a>
+				                </div>
+				                <!--.carousel-caption-->
+				            </div>
+				            <!--.container-->
+				        </div>
+				        <!--.item-->
+				    </div>
+				    <!--.carousel-inner-->
+
+				    <!-- Controls -->
+				    <a class="left carousel-control" href="#x-corp-carousel" role="button" data-slide="prev">
+				        <i class="fa fa-angle-left" aria-hidden="true"></i>
+				        <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="right carousel-control" href="#x-corp-carousel" role="button" data-slide="next">
+				        <i class="fa fa-angle-right" aria-hidden="true"></i>
+				        <span class="sr-only">Next</span>
+				    </a>
+				</div>
+                 <!-- /end slider section -->
+
+		        <!-- services start -->
+				<section id="services" class="our-services section-padding">
+		            <div class="container">
+		              <div class="row text-center">
+		                <div class="col-xs-12">
+		                  <h2 class="section-title wow zoomIn">How does it work?</h2>
+		                </div>
+		              </div> <!-- /.row -->
+
+		              <div class="row content-row">
+		                <div class="col-xs-12 col-sm-6 service-content">
+		                  <div class="media">
+
+		                    <a class="media-left" href="#">
+		                      <i class="flaticon-upload35"></i>
+		                    </a>
+
+		                    <div class="media-body">
+		                      <h3 class="media-heading">Step 1</h3>
+		                      <p>Upload a image of a receipt with your smartphone. This will automatically store the image in Amazon Simple Storage Service (S3)</p>
+
+		                     
+		                    </div> <!-- /.media-body -->
+		                  </div> <!-- /.media -->
+		                </div> <!-- /.col-sm-6 -->
 
 
-<blockquote>
+		                <div class="col-xs-12 col-sm-6 service-content">
+		                  <div class="media">
 
-Step 1: Upload a receipt image.<br />
-Step 2: Process the text. <br />
-Step 3: Assign items to friends.<br />
-Step 4: Wait for Stripe to charge credit cards accordingly.<br /><br />
+		                    <a class="media-left" href="#">
+		                      <i class="flaticon-rows1"></i>
+		                    </a>
 
-The receipt can be either from a restaurant, cafe, or grocery store.<br /> Simply upload the image by clicking the button below.<br /><br /><br />
+		                    <div class="media-body">
+		                      <h3 class="media-heading">Step 2</h3>
+		                      <p>Process the text. This will recognize the text in the image using Google Cloud Vision API. Our in-house algorithm will then automatically extract the relevant items and prices from the image.</p>
+
+		                   
+		                    </div> <!-- /.media-body -->
+		                  </div> <!-- /.media -->
+		                </div> <!-- /.col-sm-6 -->
+
+		                <div class="col-xs-12 col-sm-6 service-content">
+		                  <div class="media">
+
+		                    <a class="media-left" href="#">
+		                      <i class="flaticon-arrow393"></i>
+		                    </a>
+
+		                    <div class="media-body">
+		                      <h3 class="media-heading">Step 3</h3>
+		                      <p>Assign items to friends. Currently, it is one item per person. The feature to split the item to multiple people is coming soon!</p>
+
+		                     
+		                    </div> <!-- /.media-body -->
+		                  </div> <!-- /.media -->
+		                </div> <!-- /.col-sm-6 -->
 
 
-<input type="file" id="file-chooser" onchange="readURL(this);"/>
-<div class = "upload">
-    <button id="upload-button">Upload Image</button>
-</div>
+		                <div class="col-xs-12 col-sm-6 service-content">
+		                  <div class="media">
+
+		                    <a class="media-left" href="#">
+		                      <i class="flaticon-credit20"></i>
+		                    </a>
+
+		                    <div class="media-body">
+		                      <h3 class="media-heading">Step 4</h3>
+		                      <p>Wait for Stripe to charge credit cards accordingly.</p>
+
+		                    </div> <!-- /.media-body -->
+		                  </div> <!-- /.media -->
+		                </div> <!-- /.col-sm-6 -->
+		              </div> <!-- /.row -->
+
+		            </div><!-- /.container -->
+		          </section>
+		        <!-- services end -->
+
+
+<section id="start" class="our-services section-padding">
+		            <div class="container">
+		              <div class="row text-center">
+		                <div class="col-xs-12">
+		                  <h2 class="section-title wow zoomIn">Start</h2>
+		                </div>
+		              </div> <!-- /.row -->
+
+
+		       <input type="file" id="file-chooser" onchange="readURL(this);"/>
+<br />
+    <button id="upload-button" style = "border:none; background-color: #FFFFFF;">
+    	<div class ="process-circle wow zoomIn">
+    	<img src="/static/img/upload" alt="" align = "center">
+
+		</div>
+    </button>
+
+
 
     <div id="results"></div>
     <script type="text/javascript">
@@ -166,22 +372,26 @@ function readURL(input) {
         <input id='filename' name='filename' type='hidden' />
     </form>
 
-    <br />
+
 
 
     <img id="blah" src="#" height = 500px width = 400px alt = ''
-     style = "float:right"/> <br /> <br />
+     style = "float:right"/> 
 
     <img src={{img_str}} height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
 
 <form action="/process">
-    <div class = "upload">
-    <button type="submit" style = "background: #008CBA">Process Image
-
+    <button type = "submit" style = "border:none; background-color: transparent;">
+    	<div class ="process-circle wow zoomIn"><br />
+    	<img src="/static/img/glass.png" alt="" align = "center">
+		</div>
     </button>
-    </div>
 </form> <br />
+
+
+
+
 
 <br />
 <table cellspacing = '10'>
@@ -208,15 +418,13 @@ function readURL(input) {
 {% endfor %}
 </table>
 
-<div class = "upload">
+<button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
+    	<div class ="process-circle wow zoomIn"><br />
+    	<img src="/static/img/divide.png" alt="" align = "center" height = 75 width = 75>
+		</div>
+    </button>
 
 
-<button type="submit" value = "Submit" style = "background: #922B21">Split Items
-</button>
-
-<br />
-
-</div>
 
   </form>
 
@@ -246,9 +454,95 @@ function readURL(input) {
 
 </ul>
 
+<br /><br />
 
+<button style = "border:none; background-color: transparent;">
+    	<div class ="process-circle wow zoomIn"><br />
+    	<img src="/static/img/card.png" alt="" align = "center" height = 75 width = 75>
+		</div>
+    </button>
 
 </blockquote>
+</div>
+
+</section>
+
+
+
+
+		        <!-- footer start -->
+				<footer id="contact" class="footer-widget-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-3 col-md-3 col-md-offset-1">
+								<div class="footer-widget footer-logo">
+									<a href="#"></a>
+								</div><!-- /.col-md-6 -->
+							</div><!-- /.col-md-6 -->
+							
+							<div class="col-sm-3 col-md-2 col-lg-2">
+								<div class="footer-widget">
+									<h3>Social</h3>
+									<ul>
+										<li><a href="#">Github</a></li>
+										
+
+						<div class="row">
+							<div class="col-xs-12 text-center">
+								
+							</div>
+						</div>
+
+					</div><!-- /.container -->
+		
+				</footer>
+		
+				<!-- footer end -->
+        </div> <!-- .st-content-inner -->
+
+    </div> <!-- .st-content -->
+    </div> <!-- .st-pusher -->
+
+
+   
+		<!-- Preloader -->
+		<div id="preloader">
+			<div id="status">
+				<div class="status-mes"></div>
+			</div>
+		</div>
+
+
+	    <!-- jQuery -->
+	    <script src="/static/js/jquery.js"></script>
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="/static/js/bootstrap.min.js"></script>
+	    <!-- wow.min.js -->
+	    <script src="/static/js/wow.min.js"></script>
+	    <!-- smoothscroll -->
+	    <script src="/static/js/smoothscroll.js"></script>
+	    <!-- twitterFetcher_min -->
+	    <script src="/static/js/twitterFetcher_min.js"></script>
+	    <!-- owl.carousel -->
+	    <script src="/static/js/owl.carousel.min.js"></script>
+		<!-- Offcanvas Menu -->
+		<script src="/static/js/hippo-offcanvas.js"></script>
+		<!-- inview -->
+		<script src="/static/js/jquery.inview.min.js"></script>
+		<!-- stellar -->
+		<script src="/static/js/jquery.stellar.js"></script>
+		<!-- countTo -->
+		<script src="/static/js/jquery.countTo.js"></script>
+	    <!-- Scrolling Nav JavaScript -->
+	    <script src="/static/js/jquery.easing.min.js"></script>
+		<!-- flickerPhoto -->
+		<script src="/static/js/flickerPhoto.min.js"></script>
+		<!-- Shuffle.min js -->
+		<script src="/static/js/jquery.shuffle.min.js"></script>
+	    <!-- GOGLE MAP -->
+	    <script src="https://maps.googleapis.com/maps/api/js"></script>
+	    <!-- Custom Script -->
+	    <script src="/static/js/scripts.js"></script>
 
 
 
@@ -259,10 +553,5 @@ function readURL(input) {
 
 
 
-
-
-
-
-</body>
-
+	</body>
 </html>

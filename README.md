@@ -13,6 +13,10 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 
 # Changelog
 
+### 0.0.3 - 2018-4-22
+#### Added
+- Major UI overhaul
+
 ### 0.0.2 - 2018-4-17
 #### Added
 - Text processing / split items buttons
@@ -21,6 +25,7 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - More robust text processing algorithm
 - Display of bounding boxes on image
 - Parsing of discounts
+- Basic login system
 
 ### 0.0.1 - 2018-4-13
 #### Added

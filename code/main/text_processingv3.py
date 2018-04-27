@@ -80,6 +80,21 @@ def idx2text(desc, neighbors):
     return item_m
 
 
+def filter_item(res):
+    """
+    Filter out not useful items.
+    Return a filtered dictionary.
+    """
+    res_clean = {}
+    pattern = re.compile(r'(change|credit\s?card|subtotal|visa|total|x{2,}|^$)')
+    for i in res.keys():
+        if pattern.search(i.lower()) is None and \
+           re.search(r'^\$?0.00$', res[i]) is None:
+            res_clean[i] = res[i]
+
+    return res_clean
+
+
 def simple_process(texts):
     # get description and coordinate for each detected component
     desc, vertices = desc_coord(texts)
@@ -89,4 +104,6 @@ def simple_process(texts):
     neighbors = find_neighbor(desc, vertices, m_idx)
     # convert index to text
     res = idx2text(desc, neighbors)
-    return res
+    # clena items
+    res_clean = filter_item(res)
+    return res_clean

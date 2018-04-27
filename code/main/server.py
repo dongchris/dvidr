@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 from pipeline import *
-from text_processingv2 import simple_process
+from text_processingv3 import simple_process
 
 filename = None
 app = Flask(__name__, template_folder='../templates',
@@ -74,7 +74,7 @@ def process():
     print(img_str[:30] + "..." + img_str[-20:])
 
     # process text
-    output = simple_process(texts[1], n=5)
+    output = simple_process(texts[0]); print(output)
     global items
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]

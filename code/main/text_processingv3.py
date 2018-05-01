@@ -9,7 +9,7 @@ def desc_coord(texts):
     desc_res = []
     vertices_res = []
     for text in texts[1:]:  # 0th bounding box is whole picture
-        desc = text.description
+        desc = text.description.encode('ascii','ignore').decode('ascii')
         desc_res.append(desc)
         # get coordinates
         vertices = [(vertex.x, vertex.y)

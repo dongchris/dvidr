@@ -156,7 +156,7 @@ def split():
             for key, val in d.items():
                 payer.append(key)
                 totalprice.append('%.2f' % np.sum(val))
-            combine = zip(payer, totalprice)
+            combine = list(zip(payer, totalprice))
 
             return render_template("index.html",
                                    payer_list=payer_list, combine=combine)

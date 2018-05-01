@@ -20,7 +20,7 @@ import numpy as np
 import re
 import sys
 
-from text_processingv2 import simple_process
+from text_processingv3 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \

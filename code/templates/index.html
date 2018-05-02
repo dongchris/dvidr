@@ -95,7 +95,7 @@ ul.leaders span + span {
 		                          <i class="fa fa-bars"></i>
 		                        </button>
 							    <!-- offcanvas-trigger-effects -->
-								<h1 class="logo"><a class="navbar-brand" href="">
+								<h1 class="logo"><a class="navbar-brand" href="/">
 								<!-- 	<img src="/static/img/logo.png" alt=""
 									height = 80px width = 110px 
 									style = "border: 0 ;align:'left';
@@ -398,32 +398,45 @@ function readURL(input) {
 
 
 {% for item, price, payer in texts %}
-
+	
   <form id="form1" action="/split" method="POST" enctype="multipart/form-data">
 	
+	<table style = "width: 15%">
 	<fieldset>
   	<legend><tr><b>{{item}}</b> {{price}}</tr> <br /> <br /></legend>
 
-  	<div id = "check">
-
-      <input name = {{payer}} type = 'checkbox' value = 'Chris'>
-      <label for="Chris">Chris</label> &nbsp;
-      <input name = {{payer}} type = 'checkbox' value = 'Qian'>
-      <label for="Qian">Qian</label> &nbsp;
-      <input name = {{payer}} type = 'checkbox' value = 'Jing'>
-      <label for="Jing">Jing</label> &nbsp;
-      <input name = {{payer}} type = 'checkbox' value = 'Jay'>
-      <label for="Jay">Jay</label> <br />
-      <input name = {{payer}} type = 'checkbox' value = 'Patrick'>
-      <label for="Patrick">Patrick</label> &nbsp;
-      <input name = {{payer}} type = 'checkbox' value = 'Nick'>
-      <label for="Nick">Nick</label> &nbsp;
-      <input name = {{payer}} type = 'checkbox' value = 'Diane'>
-      <label for="Diane">Diane</label> &nbsp;
-
-	</div>
+  	  <tr>
+     <td> <input name = {{payer}} type = 'checkbox' value = 'Chris'>
+      <label for="Chris">Chris</label> </td>
+  
+     <td> <input name = {{payer}} type = 'checkbox' value = 'Qian'>
+      <label for="Qian">Qian</label> </td>
+  </tr>
+  <tr>
+      <td><input name = {{payer}} type = 'checkbox' value = 'Jing'>
+      <label for="Jing">Jing</label> </td>
+  
+      <td><input name = {{payer}} type = 'checkbox' value = 'Jay'>
+      <label for="Jay">Jay</label></td>
+  </tr>
+  <tr>
+      <td><input name = {{payer}} type = 'checkbox' value = 'Patrick'>
+      <label for="Patrick">Patrick</label> </td>
+  
+      <td><input name = {{payer}} type = 'checkbox' value = 'Nick'>
+      <label for="Nick">Nick</label> </td>
+  </tr>
+  <tr>
+      <td><input name = {{payer}} type = 'checkbox' value = 'Diane'>
+      <label for="Diane">Diane</label> </td>
+</tr>
+</table>
+  
 
     </fieldset>    
+
+
+
 
         <!-- &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br /> -->
 
@@ -433,6 +446,7 @@ function readURL(input) {
 
 {% endfor %}
 </table>
+
 
 <button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />

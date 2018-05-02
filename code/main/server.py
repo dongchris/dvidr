@@ -86,6 +86,7 @@ def process():
                else prices2[i] for i in range(len(prices2))]
     paylist = ['payer' + str(x) for x in range(len(items))]
     texts = list(zip(items, prices, paylist))
+
     return render_template('index.html', texts=texts, img_str=img_str)
 
 
@@ -145,6 +146,8 @@ def split():
     """
     if request.method == "POST":
         payer_list = [request.form.getlist("payer%s" %i, None) for i in range(len(items))]
+        tip_amount = float(request.form.getlist("tipamount")[0].encode('ascii'))
+        print tip_amount
         print payer_list
         
         if payer_list is not None:
@@ -157,9 +160,12 @@ def split():
                         d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
             payer = []
             totalprice = []
+
+            tip_amount = tip_amount / len(np.unique(payer_list))
+            print tip_amount
             for key, val in d.items():
                 payer.append(key)
-                totalprice.append('%.2f' % np.sum(val))
+                totalprice.append('%.2f' % (np.sum(val) + tip_amount))
             combine = list(zip(payer, totalprice))
             return render_template("index.html",
                                    payer_list=payer_list, combine=combine)

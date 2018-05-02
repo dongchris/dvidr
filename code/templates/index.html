@@ -73,9 +73,22 @@ ul.leaders span + span {
     background: white}
 
 
+.hidden{
+    display:none;
+}
+
+.unhidden{
+    display:block;
+}
 
 </style>
 	    
+
+
+
+
+
+
 	</head>
 
 
@@ -366,6 +379,8 @@ function readURL(input) {
 
 
 
+
+
     </script>
 
     <form action = "/uploader" method="POST" name='myForm'>
@@ -430,24 +445,25 @@ function readURL(input) {
       <td><input name = {{payer}} type = 'checkbox' value = 'Diane'>
       <label for="Diane">Diane</label> </td>
 </tr>
-</table>
+
+
   
 
     </fieldset>    
 
-
-
-
-        <!-- &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br /> -->
-
-<br />
-
-
-
 {% endfor %}
+
+
+
+<tr>
+<td>Tip: &nbsp; <input type = "text" name = tipamount maxlength = 6 size = 6 value = 0></td>
+</tr>
+
+
+</table>
 </table>
 
-
+<br />
 <button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/divide.png" alt="" align = "center" height = 75 width = 75>

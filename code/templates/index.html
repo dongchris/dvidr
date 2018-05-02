@@ -397,19 +397,35 @@ function readURL(input) {
 <table cellspacing = '10'>
 
 
-{% for item, price in texts %}
+{% for item, price, payer in texts %}
 
   <form id="form1" action="/split" method="POST" enctype="multipart/form-data">
-    <select id="mySelect" name = "payers">
-      <option value="Chris">Chris</option>
-      <option value="Qian">Qian</option>
-      <option value="Jing">Jing</option>
-      <option value="Jay">Jay</option>
-      <option value="Patrick">Patrick</option>
-      <option value="Nick">Nick</option>
-      <option value="Diane">Diane</option>
-    </select>
-        &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br />
+	
+	<fieldset>
+  	<legend><tr><b>{{item}}</b> {{price}}</tr> <br /> <br /></legend>
+
+  	<div id = "check">
+
+      <input name = {{payer}} type = 'checkbox' value = 'Chris'>
+      <label for="Chris">Chris</label> &nbsp;
+      <input name = {{payer}} type = 'checkbox' value = 'Qian'>
+      <label for="Qian">Qian</label> &nbsp;
+      <input name = {{payer}} type = 'checkbox' value = 'Jing'>
+      <label for="Jing">Jing</label> &nbsp;
+      <input name = {{payer}} type = 'checkbox' value = 'Jay'>
+      <label for="Jay">Jay</label> <br />
+      <input name = {{payer}} type = 'checkbox' value = 'Patrick'>
+      <label for="Patrick">Patrick</label> &nbsp;
+      <input name = {{payer}} type = 'checkbox' value = 'Nick'>
+      <label for="Nick">Nick</label> &nbsp;
+      <input name = {{payer}} type = 'checkbox' value = 'Diane'>
+      <label for="Diane">Diane</label> &nbsp;
+
+	</div>
+
+    </fieldset>    
+
+        <!-- &emsp; <tr><b>{{item}}</b> {{price}}</tr> <br /> <br /> -->
 
 <br />
 

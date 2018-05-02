@@ -3,6 +3,7 @@ from flask_login import (current_user, LoginManager, login_required,
                          login_user, logout_user, UserMixin)
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+import numpy as np
 import os
 from pipeline import *
 from text_processingv3 import simple_process
@@ -83,7 +84,8 @@ def process():
                float(price) for price in prices]
     prices2 = [prices2[i] * -1 if items[i].lower() == 'discount'
                else prices2[i] for i in range(len(prices2))]
-    texts = zip(items, prices)
+    paylist = ['payer' + str(x) for x in range(len(items))]
+    texts = list(zip(items, prices, paylist))
     return render_template('index.html', texts=texts, img_str=img_str)
 
 
@@ -142,15 +144,17 @@ def split():
     print out the final prices for each user.
     """
     if request.method == "POST":
-        payer_list = request.form.getlist("payers", None)
-        import numpy as np
+        payer_list = [request.form.getlist("payer%s" %i, None) for i in range(len(items))]
+        print payer_list
+        
         if payer_list is not None:
             d = dict()
             for i in range(len(items)):
-                if payer_list[i] in d:
-                    d[payer_list[i]].append(prices2[i])
-                else:
-                    d[payer_list[i]] = [prices2[i]]
+                for j in range(len(payer_list[i])):
+                    if payer_list[i][j] in d:
+                        d[payer_list[i][j]].append(prices2[i] / len(payer_list[i]))
+                    else:
+                        d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
             payer = []
             totalprice = []
             for key, val in d.items():

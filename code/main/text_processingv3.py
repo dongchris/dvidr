@@ -9,7 +9,7 @@ def desc_coord(texts):
     desc_res = []
     vertices_res = []
     for text in texts[1:]:  # 0th bounding box is whole picture
-        desc = text.description.encode('ascii','ignore').decode('ascii')
+        desc = text.description.encode('ascii', 'ignore').decode('ascii')
         desc_res.append(desc)
         # get coordinates
         vertices = [(vertex.x, vertex.y)
@@ -86,7 +86,8 @@ def filter_item(res):
     Return a filtered dictionary.
     """
     res_clean = {}
-    pattern = re.compile(r'(change|credit\s?card|subtotal|visa|total|x{2,}|^$)')
+    pattern = re.compile(r'( \
+                 change|credit\s?card|subtotal|visa|total|x{2,}|^$)')
     for i in res.keys():
         if pattern.search(i.lower()) is None and \
            re.search(r'^\$?0.00$', res[i]) is None:

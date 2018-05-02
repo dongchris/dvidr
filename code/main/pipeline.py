@@ -20,7 +20,7 @@ import numpy as np
 import re
 import sys
 
-from text_processingv3 import simple_process
+from text_processingv2 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
@@ -90,7 +90,7 @@ def arr2str(img_arr):
 
 
 if __name__ == '__main__':
-    filepath = (readImagefromS3("udon.jpg"))
+    filepath = (readImagefromS3("85c.jpg"))
     texts = detect_text(filepath)[1]
     print(texts)
     output = simple_process(texts, 5)

@@ -75,7 +75,8 @@ def process():
     print(img_str[:30] + "..." + img_str[-20:])
 
     # process text
-    output = simple_process(texts[0]); print(output)
+    output = simple_process(texts[0])
+    print(output)
     global items
     items = [item for item in output.keys()]
     prices = [price for price in output.values()]
@@ -145,24 +146,27 @@ def split():
     print out the final prices for each user.
     """
     if request.method == "POST":
-        payer_list = [request.form.getlist("payer%s" %i, None) for i in range(len(items))]
-        tip_amount = float(request.form.getlist("tipamount")[0].encode('ascii'))
-        print tip_amount
-        print payer_list
-        
+        payer_list = [request.form.getlist("payer%s" % i, None)
+                      for i in range(len(items))]
+        tip_amount = float(request.form.getlist("tipamount")[0]
+                                       .encode('ascii'))
+
+        print(payer_list)
+
         if payer_list is not None:
             d = dict()
             for i in range(len(items)):
                 for j in range(len(payer_list[i])):
                     if payer_list[i][j] in d:
-                        d[payer_list[i][j]].append(prices2[i] / len(payer_list[i]))
+                        d[payer_list[i][j]].append(
+                            prices2[i] / len(payer_list[i]))
                     else:
                         d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
             payer = []
             totalprice = []
 
             tip_amount = tip_amount / len(np.unique(payer_list))
-            print tip_amount
+            print(tip_amount)
             for key, val in d.items():
                 payer.append(key)
                 totalprice.append('%.2f' % (np.sum(val) + tip_amount))

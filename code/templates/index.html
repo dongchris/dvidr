@@ -8,6 +8,16 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 
+				<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118279217-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-118279217-2');
+		</script>
+
 	    <title>dvidr</title>
 	    <!-- Web Fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300' rel='stylesheet' type='text/css'>
@@ -292,7 +302,8 @@ ul.leaders span + span {
 <br />
     <button id="upload-button" style = "border:none; background-color: #FFFFFF;">
     	<div class ="process-circle wow zoomIn">
-    	<img src="/static/img/upload" alt="" align = "center">
+    	<img src="/static/img/upload" alt="" align = "center"
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'upload', 'value':1});" >
 
 		</div>
     </button>
@@ -399,7 +410,8 @@ function readURL(input) {
 <form action="/process">
     <button type = "submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/glass.png" alt="" align = "center">
+    	<img src="/static/img/glass.png" alt="" align = "center"
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'process', 'value':1});" >
 		</div>
     </button>
 </form> <br />
@@ -460,7 +472,9 @@ function readURL(input) {
 <br />
 <button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/divide.png" alt="" align = "center" height = 75 width = 75>
+    	<img src="/static/img/divide.png" alt="" align = "center" height = 75
+			 width = 75
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'submit', 'value':1});" >
 		</div>
     </button>
 
@@ -499,7 +513,9 @@ function readURL(input) {
 <form action="/pay">
 <button style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/card.png" alt="" align = "center" height = 75 width = 75>
+    	<img src="/static/img/card.png" alt="" align = "center" height = 75
+			 width = 75
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'pay', 'value':1});" >
 		</div>
     </button>
 </form>

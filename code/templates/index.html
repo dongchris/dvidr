@@ -438,13 +438,7 @@ function readURL(input) {
       <td><input name = {{payer}} type = 'checkbox' value = 'Patrick'>
       <label for="Patrick">Patrick</label> </td>
   
-      <td><input name = {{payer}} type = 'checkbox' value = 'Nick'>
-      <label for="Nick">Nick</label> </td>
   </tr>
-  <tr>
-      <td><input name = {{payer}} type = 'checkbox' value = 'Diane'>
-      <label for="Diane">Diane</label> </td>
-</tr>
 
 
   
@@ -500,13 +494,38 @@ function readURL(input) {
 
 </ul>
 
-<br /><br />
 
+
+<form action="/pay">
 <button style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/card.png" alt="" align = "center" height = 75 width = 75>
 		</div>
     </button>
+</form>
+<br /><br />
+<ul class=leaders>
+
+{% for payer, price, code in final %}
+
+<li><span>{{payer}}</span>
+ <span>{{price}}</span></li>
+
+{% endfor %}
+
+</ul>
+
+<br /><br />
+
+
+<div id="content">
+{% for payer, price, code in final %}
+<img src={{code}} alt="" class="images" height = 220px width = 170px/> &emsp; &emsp; &emsp; &#09; &#09; 
+{% endfor %}
+</div>
+
+<br /><br />
+
 
 </blockquote>
 </div>

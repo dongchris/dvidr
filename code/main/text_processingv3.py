@@ -3,13 +3,15 @@ import re
 
 def desc_coord(texts):
     """
-    Extract description and coordinates.
+    Extract description and coordinates. Remove everything below `Total`.
     Return (description, coordinates)
     """
     desc_res = []
     vertices_res = []
     for text in texts[1:]:  # 0th bounding box is whole picture
         desc = text.description.encode('ascii', 'ignore').decode('ascii')
+        if desc.lower() == 'total':
+            break  # remove everything below `Total`
         desc_res.append(desc)
         # get coordinates
         vertices = [(vertex.x, vertex.y)

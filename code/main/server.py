@@ -54,7 +54,8 @@ def get_filename():
     if request.method == 'POST':
         filename = request.form['filename']
         print('upload ', filename)
-        return render_template('index.html')
+        is_uploaded = True
+        return render_template('index.html', is_uploaded=is_uploaded)
     else:
         return render_template('index.html')
 

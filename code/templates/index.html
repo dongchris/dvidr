@@ -8,6 +8,16 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 
+				<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118279217-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-118279217-2');
+		</script>
+
 	    <title>dvidr</title>
 	    <!-- Web Fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300' rel='stylesheet' type='text/css'>
@@ -121,11 +131,18 @@ ul.leaders span + span {
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse navbar-collapse">
 								<ul class="nav navbar-nav navbar-right">
-									<li><a class="page-scroll" href="#home">Home</a></li>
-									<li><a class="page-scroll" href="#services">Steps</a></li>
-									<li><a class="page-scroll" href="#start">Start</a></li>
-									<li><a class="page-scroll" href="register">Register</a></li>
-									<li><a class="page-scroll" href="login">Login</a></li>
+									<li><a class="page-scroll" href="#home"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'home', 'value':1});">Home</a></li>
+									<li><a class="page-scroll"
+										   href="#services"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'steps', 'value':1});">Steps</a></li>
+									<li><a class="page-scroll" href="#start"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'start', 'value':1});">Start</a></li>
+									<li><a class="page-scroll"
+										   href="register"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'register', 'value':1});">Register</a></li>
+									<li><a class="page-scroll" href="login"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'login', 'value':1});">Login</a></li>
 									
 								</ul>
 
@@ -167,7 +184,7 @@ ul.leaders span + span {
 				        <!--.item-->
 
 				        <div class="item">
-				            <img src="/static/img/split.jpeg" alt="Hero Slide">
+				            <img src="/static/img/storage.jpeg" alt="Hero Slide">
 				            <!--Slide Image-->
 
 				            <div class="container">
@@ -216,8 +233,8 @@ ul.leaders span + span {
 		                    </a>
 
 		                    <div class="media-body">
-		                      <h3 class="media-heading">Step 1</h3>
-		                      <p>Upload a image of a receipt with your smartphone. This will automatically store the image in Amazon Simple Storage Service (S3)</p>
+		                      <h3 class="media-heading">Step 0 & 1</h3>
+		                      <p>Upload a image of a receipt with your smartphone. Please make sure the image is straight with all four corners showing. This will automatically store the image in Amazon Simple Storage Service (S3)</p>
 
 		                     
 		                    </div> <!-- /.media-body -->
@@ -250,7 +267,7 @@ ul.leaders span + span {
 
 		                    <div class="media-body">
 		                      <h3 class="media-heading">Step 3</h3>
-		                      <p>Assign items to friends. Currently, it is one item per person. The feature to split the item to multiple people is coming soon!</p>
+		                      <p>Assign items to friends through the checkboxes. More than one person can be assigned to each item. If applicable, a tip can be added.</p>
 
 		                     
 		                    </div> <!-- /.media-body -->
@@ -267,7 +284,7 @@ ul.leaders span + span {
 
 		                    <div class="media-body">
 		                      <h3 class="media-heading">Step 4</h3>
-		                      <p>Wait for Stripe to charge credit cards accordingly.</p>
+		                      <p>Currently, the Venmo QR Code of users who are paying will be displayed. The feature to charge credit cards accordingly will be implemented in the future.</p>
 
 		                    </div> <!-- /.media-body -->
 		                  </div> <!-- /.media -->
@@ -287,12 +304,17 @@ ul.leaders span + span {
 		                </div>
 		              </div> <!-- /.row -->
 
-
+<img src="/static/img/zero.png" alt = "" align = "left" height = "120px" width = "150px">
 		       <input type="file" id="file-chooser" onchange="readURL(this);"/>
-<br />
+<br /><br /><br /><br /><br />
+
+	<img src="/static/img/one.png" alt = "" align = "left" height = "120px" width = "150px">
+	
+
     <button id="upload-button" style = "border:none; background-color: #FFFFFF;">
     	<div class ="process-circle wow zoomIn">
-    	<img src="/static/img/upload" alt="" align = "center">
+    	<img src="/static/img/upload" alt="" align = "center"
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'upload', 'value':1});" >
 
 		</div>
     </button>
@@ -396,17 +418,21 @@ function readURL(input) {
     <img src={{img_str}} height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
 
+
+{% if is_uploaded is defined %}
+Upload is successful!
+<br /><br />
+{% endif %}
+
+<img src="/static/img/two.png" alt = "" align = "left" height = "120px" width = "150px">
 <form action="/process">
     <button type = "submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/glass.png" alt="" align = "center">
+    	<img src="/static/img/glass.png" alt="" align = "center"
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'process', 'value':1});" >
 		</div>
     </button>
 </form> <br />
-
-
-
-
 
 <br />
 <table cellspacing = '10'>
@@ -438,13 +464,7 @@ function readURL(input) {
       <td><input name = {{payer}} type = 'checkbox' value = 'Patrick'>
       <label for="Patrick">Patrick</label> </td>
   
-      <td><input name = {{payer}} type = 'checkbox' value = 'Nick'>
-      <label for="Nick">Nick</label> </td>
   </tr>
-  <tr>
-      <td><input name = {{payer}} type = 'checkbox' value = 'Diane'>
-      <label for="Diane">Diane</label> </td>
-</tr>
 
 
   
@@ -464,12 +484,15 @@ function readURL(input) {
 </table>
 
 <br />
+<img src="/static/img/three.png" alt = "" align = "left" height = "120px" width = "150px">
 <button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/divide.png" alt="" align = "center" height = 75 width = 75>
+    	<img src="/static/img/divide.png" alt="" align = "center" height = 75
+			 width = 75
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'submit', 'value':1});" >
 		</div>
     </button>
-
+<br /> <br />
 
 
   </form>
@@ -500,13 +523,40 @@ function readURL(input) {
 
 </ul>
 
-<br /><br />
 
+<img src="/static/img/four.png" alt = "" align = "left" height = "120px" width = "150px">
+<form action="/pay">
 <button style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
-    	<img src="/static/img/card.png" alt="" align = "center" height = 75 width = 75>
+    	<img src="/static/img/card.png" alt="" align = "center" height = 75
+			 width = 75
+			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'pay', 'value':1});" >
 		</div>
     </button>
+</form>
+<br /><br />
+<ul class=leaders>
+
+{% for payer, price, code in final %}
+
+<li><span>{{payer}}</span>
+ <span>{{price}}</span></li>
+
+{% endfor %}
+
+</ul>
+
+<br /><br />
+
+
+<div id="content">
+{% for payer, price, code in final %}
+<img src={{code}} alt="" class="images" height = 220px width = 170px/> &emsp; &emsp; &emsp; &#09; &#09; 
+{% endfor %}
+</div>
+
+<br /><br />
+
 
 </blockquote>
 </div>

@@ -56,7 +56,8 @@ def get_filename():
     if request.method == 'POST':
         filename = request.form['filename']
         print('upload ', filename)
-        return render_template('index.html')
+        is_uploaded = True
+        return render_template('index.html', is_uploaded=is_uploaded)
     else:
         return render_template('index.html')
 
@@ -184,6 +185,8 @@ def split():
                             prices2[i] / len(payer_list[i]))
                     else:
                         d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
+            global payer
+            global totalprice
             payer = []
             totalprice = []
 
@@ -192,10 +195,25 @@ def split():
             for key, val in d.items():
                 payer.append(key)
                 totalprice.append('%.2f' % (np.sum(val) + tip_amount))
+
             combine = list(zip(payer, totalprice))
+
             return render_template("index.html",
                                    payer_list=payer_list, combine=combine)
     return render_template("index.html")
+
+
+@app.route('/pay')
+def pay():
+    """
+    Display venmo QR code for whoever is paying for the items
+    """
+
+    qrcode = ["/static/img/Venmo" + p + ".png" for p in payer]
+
+    final = list(zip(payer, totalprice, qrcode))
+
+    return render_template("index.html", final=final)
 
 
 if __name__ == '__main__':

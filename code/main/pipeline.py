@@ -25,7 +25,7 @@ from text_processingv3 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
-# "/home/ec2-user/group-assignment-2-dvidr/code/main/apikey.json"
+# "/Users/jingsong/MSAN/06Spring2018B/3DataScienceAppDevelopment/project/group-assignment-2-dvidr/code/main/apikey.json"
 
 
 # def detect_text(uri):

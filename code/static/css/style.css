@@ -1,4 +1,32 @@
 
+.images
+{
+display: inline;
+margin: 0px;
+padding: 0px;
+}
+
+#content
+{
+display: block;
+margin: 0px;
+padding: 0px;
+position: relative;
+top: 90px;
+height: auto;
+max-width: auto;
+overflow-y: hidden;
+overflow-x:auto;
+
+}
+
+
+#content img
+{
+display: inline-block;
+    margin-right:5px;
+    border:1px solid #ccc;
+}
 
 body {
     font-family: "Roboto", sans-serif;

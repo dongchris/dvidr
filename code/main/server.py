@@ -13,7 +13,7 @@ from straighten_final import straighten
 filename = None
 app = Flask(__name__, template_folder='../templates',
             static_folder='../static')
-db_pwd = open('db_login_info.txt', 'r').read().splitlines()
+db_pwd = 'usfmsan\nchrisdong'.splitlines()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%s:%s@dvidrdbinstance.\
 cjdc2sny2qtf.us-west-2.rds.amazonaws.com:5432/dvidrdb' % (db_pwd[0], db_pwd[1])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True

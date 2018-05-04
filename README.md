@@ -13,7 +13,6 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 
 # Changelog
 
-<<<<<<< HEAD
 ### 0.0.4 - 2018-5-3
 #### Added
 - Improvements to UI
@@ -22,9 +21,8 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - Straightening of image
 - Display of Venmo QR Code
 - Google Analytics tracking
-- Coordinate-based text processingn algorithm
+- Coordinate-based text processing algorithm
 
-||||||| merged common ancestors
 =======
 ### 0.0.4 - 2018-5-3
 #### Added
@@ -36,7 +34,6 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - Google Analytics tracking
 - Coordinate-based text processing algorithm
 
->>>>>>> 207930b509adf5c688d70c57fe21aa7db27dda22
 ### 0.0.3 - 2018-4-22
 #### Added
 - Major UI overhaul

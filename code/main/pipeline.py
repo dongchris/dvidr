@@ -15,9 +15,6 @@ import skimage.io as skio
 import base64
 import boto
 import cv2
-import matplotlib
-import matplotlib.pyplot as plt
-matplotlib.use("Agg")
 import io
 import numpy as np
 import re
@@ -106,11 +103,13 @@ def bounding_box(img_path, texts):
     """add bounding box to straightened image, return image numpy array
     """
     # read image from local
-    img = plt.imread(img_path)
+    img = cv2.imread(img_path)
 
-    # convert gray-scale to RGB
+    # convert to RGB
     if len(img.shape) == 2:
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+    else:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     for text in texts[1:]:  # 0th bounding box is whole picture
         vertices = [(vertex.x, vertex.y)  # get coordinates

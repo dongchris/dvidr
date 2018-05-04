@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>text_processingv3 &#8212; dvidr  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for text_processingv3</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># def desc_coord(texts):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Extract description and coordinates. Remove everything below `Total`.</span>
+<span class="c1">#     Return (description, coordinates)</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     desc_res = []</span>
+<span class="c1">#     vertices_res = []</span>
+<span class="c1">#     for text in texts[1:]:  # 0th bounding box is whole picture</span>
+<span class="c1">#         desc = text.description.encode(&#39;ascii&#39;, &#39;ignore&#39;).decode(&#39;ascii&#39;)</span>
+<span class="c1">#         if desc.lower() == &#39;total&#39;:</span>
+<span class="c1">#             break  # remove everything below `Total`</span>
+<span class="c1">#         desc_res.append(desc)</span>
+<span class="c1">#         # get coordinates</span>
+<span class="c1">#         vertices = [(vertex.x, vertex.y)</span>
+<span class="c1">#                     for vertex in text.bounding_poly.vertices]</span>
+<span class="c1">#         vertices_res.append(vertices)</span>
+<span class="c1">#     return desc_res, vertices_res</span>
+
+
+<div class="viewcode-block" id="desc_coord"><a class="viewcode-back" href="../code.html#text_processingv3.desc_coord">[docs]</a><span class="k">def</span> <span class="nf">desc_coord</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract description and coordinates. Remove everything below `Total`</span>
+<span class="sd">    Return (description, coordinates)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">desc_res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">vertices_res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># 0th bounding box is whole picture</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">desc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;total&#39;</span> <span class="ow">or</span> <span class="n">desc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tip&#39;</span> <span class="ow">or</span> \
+           <span class="n">desc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;guide&#39;</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># remove everything below `Total` and `Tip`</span>
+        <span class="n">desc_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span>
+        <span class="c1"># get coordinates</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">vertex</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">vertex</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">bounding_poly</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
+        <span class="n">vertices_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">desc_res</span><span class="p">,</span> <span class="n">vertices_res</span></div>
+
+
+<div class="viewcode-block" id="pre_proc"><a class="viewcode-back" href="../code.html#text_processingv3.pre_proc">[docs]</a><span class="k">def</span> <span class="nf">pre_proc</span><span class="p">(</span><span class="n">text_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pre-process text: find digits matching the money pattern on the receipts.</span>
+<span class="sd">    Return index of matching text</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># assume money has 2 decimal places, which is very common.</span>
+    <span class="c1"># e.g., $.50, .50, $1.50, 1.50, S1.50, s1.50</span>
+    <span class="n">money_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[$Ss]?(\d*\.\d</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+    <span class="n">index_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">money</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">text_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">money_pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">money</span><span class="p">)):</span>
+            <span class="n">text_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;^[Ss]&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">money</span><span class="p">)</span>  <span class="c1"># convert S to $</span>
+            <span class="n">index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">index_list</span></div>
+
+
+<div class="viewcode-block" id="judge_neighbor"><a class="viewcode-back" href="../code.html#text_processingv3.judge_neighbor">[docs]</a><span class="k">def</span> <span class="nf">judge_neighbor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Judge whether the item align with the money.</span>
+<span class="sd">    Return 1 if aligned, 0 if not aligned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vi</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">vj</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="c1"># use the height of money box as threshold</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vi</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vi</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span> <span class="n">vj</span><span class="p">):</span>               <span class="c1"># check threshold for 4 corners</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+
+<div class="viewcode-block" id="find_neighbor"><a class="viewcode-back" href="../code.html#text_processingv3.find_neighbor">[docs]</a><span class="k">def</span> <span class="nf">find_neighbor</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">m_idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find aligned items for money.</span>
+<span class="sd">    Return a dictionary: {money_idx: item_idx list}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">item_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">m_idx</span><span class="p">)]</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m_idx</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m_idx</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">item_idx</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">judge_neighbor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+                <span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">neighbors</span></div>
+
+
+<div class="viewcode-block" id="idx2text"><a class="viewcode-back" href="../code.html#text_processingv3.idx2text">[docs]</a><span class="k">def</span> <span class="nf">idx2text</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert index to text.</span>
+<span class="sd">    Return a dictionary {item: money}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">item_m</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+        <span class="n">item_m</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">return</span> <span class="n">item_m</span></div>
+
+
+<span class="c1"># def filter_item(res):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Filter out not useful items.</span>
+<span class="c1">#     Return a filtered dictionary.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     res_clean = {}</span>
+<span class="c1">#     pattern = re.compile(r&#39;( \</span>
+<span class="c1">#                  change|credit\s?card|subtotal|visa|total|x{2,}|^$)&#39;)</span>
+<span class="c1">#     for i in res.keys():</span>
+<span class="c1">#         if pattern.search(i.lower()) is None and \</span>
+<span class="c1">#            re.search(r&#39;^\$?0.00$&#39;, res[i]) is None:</span>
+<span class="c1">#             res_clean[i] = res[i]</span>
+<span class="c1">#</span>
+<span class="c1">#     return res_clean</span>
+
+
+<div class="viewcode-block" id="filter_item"><a class="viewcode-back" href="../code.html#text_processingv3.filter_item">[docs]</a><span class="k">def</span> <span class="nf">filter_item</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out not useful items.</span>
+<span class="sd">    Return a filtered dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res_clean</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;change&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;credit\s?card&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;subtotal&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;visa&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;total&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;x{2,}&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>
+                                   <span class="sa">r</span><span class="s1">&#39;amount&#39;</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="s1">&#39;tax&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">and</span> \
+             <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\$?0.00$&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res_clean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">res_clean</span></div>
+
+
+<div class="viewcode-block" id="simple_process"><a class="viewcode-back" href="../code.html#text_processingv3.simple_process">[docs]</a><span class="k">def</span> <span class="nf">simple_process</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="c1"># get description and coordinate for each detected component</span>
+    <span class="n">desc</span><span class="p">,</span> <span class="n">vertices</span> <span class="o">=</span> <span class="n">desc_coord</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+    <span class="c1"># get index for money</span>
+    <span class="n">m_idx</span> <span class="o">=</span> <span class="n">pre_proc</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span>
+    <span class="c1"># get index for corresponding items</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="n">find_neighbor</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">m_idx</span><span class="p">)</span>
+    <span class="c1"># convert index to text</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">idx2text</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">)</span>
+    <span class="c1"># clena items</span>
+    <span class="n">res_clean</span> <span class="o">=</span> <span class="n">filter_item</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res_clean</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, dvidr group.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,17 +1,36 @@
 import re
 
+# def desc_coord(texts):
+#     """
+#     Extract description and coordinates. Remove everything below `Total`.
+#     Return (description, coordinates)
+#     """
+#     desc_res = []
+#     vertices_res = []
+#     for text in texts[1:]:  # 0th bounding box is whole picture
+#         desc = text.description.encode('ascii', 'ignore').decode('ascii')
+#         if desc.lower() == 'total':
+#             break  # remove everything below `Total`
+#         desc_res.append(desc)
+#         # get coordinates
+#         vertices = [(vertex.x, vertex.y)
+#                     for vertex in text.bounding_poly.vertices]
+#         vertices_res.append(vertices)
+#     return desc_res, vertices_res
+
 
 def desc_coord(texts):
     """
-    Extract description and coordinates. Remove everything below `Total`.
+    Extract description and coordinates. Remove everything below `Total`
     Return (description, coordinates)
     """
     desc_res = []
     vertices_res = []
     for text in texts[1:]:  # 0th bounding box is whole picture
-        desc = text.description.encode('ascii', 'ignore').decode('ascii')
-        if desc.lower() == 'total':
-            break  # remove everything below `Total`
+        desc = text.description.encode('utf-8', 'ignore').decode('utf-8')
+        if desc.lower() == 'total' or desc.lower() == 'tip' or \
+           desc.lower() == 'guide':
+            break  # remove everything below `Total` and `Tip`
         desc_res.append(desc)
         # get coordinates
         vertices = [(vertex.x, vertex.y)
@@ -33,7 +52,7 @@ def pre_proc(text_list):
         if re.findall(money_pattern, str(money)):
             text_list[index] = re.sub('^S', '$', money)  # convert S to $
             index_list.append(index)
-    
+
     return index_list
 
 
@@ -84,17 +103,40 @@ def idx2text(desc, neighbors):
     return item_m
 
 
+# def filter_item(res):
+#     """
+#     Filter out not useful items.
+#     Return a filtered dictionary.
+#     """
+#     res_clean = {}
+#     pattern = re.compile(r'( \
+#                  change|credit\s?card|subtotal|visa|total|x{2,}|^$)')
+#     for i in res.keys():
+#         if pattern.search(i.lower()) is None and \
+#            re.search(r'^\$?0.00$', res[i]) is None:
+#             res_clean[i] = res[i]
+#
+#     return res_clean
+
+
 def filter_item(res):
     """
     Filter out not useful items.
     Return a filtered dictionary.
     """
     res_clean = {}
-    pattern = re.compile(r'( \
-                 change|credit\s?card|subtotal|visa|total|x{2,}|^$)')
+    pattern = re.compile('|'.join([r'change',
+                                   r'credit\s?card',
+                                   r'subtotal',
+                                   r'visa',
+                                   r'total',
+                                   r'x{2,}',
+                                   r'^$',
+                                   r':',
+                                   r'amount']))
     for i in res.keys():
-        if pattern.search(i.lower()) is None and \
-           re.search(r'^\$?0.00$', res[i]) is None:
+        if (pattern.search(i.lower()) is None or 'tax' in i.lower()) and \
+            re.search(r'^\$?0.00$', res[i]) is None:
             res_clean[i] = res[i]
 
     return res_clean

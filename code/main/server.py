@@ -70,13 +70,26 @@ def process():
     # Get image URL
     img_url = (readImagefromS3(filename))
 
-    # Straighten image and save to local
-    img = straighten(img_url)
-    img_path = 'tmp/tmp.jpg'
-    cv2.imwrite(img_path, img)
+    # (Straighten) image and save to local
+    try:
+        img = straighten(img_url)  # straightened
+        img_path = 'tmp/tmp.jpg'
+        cv2.imwrite(img_path, img)
 
-    # OCR on straightened image
-    texts = detect_text(img_path)
+        # OCR on straightened image
+        texts = detect_text(img_path)
+        output = simple_process(texts[0])  # process text
+        assert output, 'empty dictionary'
+
+    except:
+        img = download_img(img_url)  # original
+        img_path = 'tmp/tmp.jpg'
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # for use of opencv
+        cv2.imwrite(img_path, img)
+
+        # OCR on straightened image
+        texts = detect_text(img_path)
+        output = simple_process(texts[0])  # process text
 
     # add bounding box
     img_arr = bounding_box(img_path, texts[0])
@@ -84,7 +97,7 @@ def process():
     print(img_str[:30] + "..." + img_str[-20:])
 
     # process text
-    output = simple_process(texts[0])
+    # output = simple_process(texts[0])
     print(output)
     global items
     items = [item for item in output.keys()]

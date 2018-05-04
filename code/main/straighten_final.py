@@ -51,9 +51,11 @@ def transform(pos):
     return int(w),int(h),rect
 
 
-def process(img):
+def process(img, blur=2):
     """
     Main process of straighten image.
+    Mode 2: use twice blur, this works for most images;
+    Mode 1: use once blur
     Return a straightened image in gray-scale.
     """
     # resize image
@@ -64,9 +66,9 @@ def process(img):
     # convert BGR to gray-scale
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-    # Blur twice to remove noise
-    gray = cv2.GaussianBlur(gray,(11,11),0)
-    gray = cv2.GaussianBlur(gray,(11,11),0)
+    # Blur remove noise
+    for _ in range(blur):
+        gray = cv2.GaussianBlur(gray,(11,11),0)
 
     # Canny edge detection
     edge = cv2.Canny(gray,10,200)
@@ -113,5 +115,8 @@ def straighten(url):
     # convrt from RGB to BGR
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     # straighten image
-    img = process(img)
+    try:
+        img = process(img.copy(), blur=2)  # blur twice
+    except:
+        img = process(img.copy(), blur=1)  # blur once
     return img

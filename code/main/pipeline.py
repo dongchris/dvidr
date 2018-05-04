@@ -42,6 +42,13 @@ from text_processingv3 import simple_process
 #                                                'ignore').decode('ascii'))
 
 
+def download_img(img_url):
+    """Download image from url.
+    """
+    img = skio.imread(img_url)
+    return img
+
+
 def detect_text(path):
     """Detects text in the file from local"""
     client = vision.ImageAnnotatorClient()

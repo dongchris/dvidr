@@ -15,24 +15,46 @@ import skimage.io as skio
 import base64
 import boto
 import cv2
+import matplotlib.pyplot as plt
 import io
 import numpy as np
 import re
 import sys
 
-from text_processingv2 import simple_process
+from text_processingv3 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
 # "/Users/jingsong/MSAN/06Spring2018B/3DataScienceAppDevelopment/project/group-assignment-2-dvidr/code/main/apikey.json"
 
 
-def detect_text(uri):
-    """Detects text in the file located in Google Cloud Storage or on the Web.
+# def detect_text(uri):
+#     """Detects text in the file located in Google Cloud Storage or on the Web.
+#     """
+#     client = vision.ImageAnnotatorClient()
+#     image = types.Image()
+#     image.source.image_uri = uri
+#
+#     response = client.text_detection(image=image)
+#     texts = response.text_annotations
+#
+#     return (texts, texts[0].description.encode('ascii',
+#                                                'ignore').decode('ascii'))
+
+
+def download_img(img_url):
+    """Download image from url.
     """
+    img = skio.imread(img_url)
+    return img
+
+
+def detect_text(path):
+    """Detects text in the file from local"""
     client = vision.ImageAnnotatorClient()
-    image = types.Image()
-    image.source.image_uri = uri
+    with io.open(path, 'rb') as image_file:
+        content = image_file.read()
+    image = types.Image(content=content)
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
@@ -65,10 +87,29 @@ def readImagefromS3(imageFile):
     return url_name
 
 
-def bounding_box(url, texts):
-    """add bounding box to image, return image numpy array
+# def bounding_box(url, texts):
+#     """add bounding box to image, return image numpy array
+#     """
+#     img = skio.imread(url)
+#     for text in texts[1:]:  # 0th bounding box is whole picture
+#         vertices = [(vertex.x, vertex.y)  # get coordinates
+#                     for vertex in text.bounding_poly.vertices]
+#         cv2.polylines(img, [np.array(vertices)],
+#                       True, (0, 255, 0), 2)  # plot line
+#
+#     return img
+
+
+def bounding_box(img_path, texts):
+    """add bounding box to straightened image, return image numpy array
     """
-    img = skio.imread(url)
+    # read image from local
+    img = plt.imread(img_path)
+
+    # convert gray-scale to RGB
+    if len(img.shape)==2:
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+
     for text in texts[1:]:  # 0th bounding box is whole picture
         vertices = [(vertex.x, vertex.y)  # get coordinates
                     for vertex in text.bounding_poly.vertices]
@@ -91,7 +132,7 @@ def arr2str(img_arr):
 
 if __name__ == '__main__':
     filepath = (readImagefromS3("85c.jpg"))
-    texts = detect_text(filepath)[1]
+    texts = detect_text(filepath)[0]
     print(texts)
-    output = simple_process(texts, 5)
+    output = simple_process(texts)
     print(output)

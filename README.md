@@ -13,6 +13,16 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 
 # Changelog
 
+### 0.0.4 - 2018-5-3
+#### Added
+- Improvements to UI
+- Ability to select more than one item
+- Optional tip input
+- Straightening of image
+- Display of Venmo QR Code
+- Google Analytics tracking
+- Coordinate-based text processingn algorithm
+
 ### 0.0.3 - 2018-4-22
 #### Added
 - Major UI overhaul

@@ -45,12 +45,12 @@ def pre_proc(text_list):
     Return index of matching text
     """
     # assume money has 2 decimal places, which is very common.
-    # e.g., $.50, .50, $1.50, 1.50, S1.50
-    money_pattern = re.compile(r'^[$|S]?(\d*\.\d{2})$')
+    # e.g., $.50, .50, $1.50, 1.50, S1.50, s1.50
+    money_pattern = re.compile(r'^[$Ss]?(\d*\.\d{2})$')
     index_list = []
     for index, money in enumerate(text_list):
         if re.findall(money_pattern, str(money)):
-            text_list[index] = re.sub('^S', '$', money)  # convert S to $
+            text_list[index] = re.sub('^[Ss]', '$', money)  # convert S to $
             index_list.append(index)
 
     return index_list

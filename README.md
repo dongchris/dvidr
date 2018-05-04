@@ -21,7 +21,7 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - Straightening of image
 - Display of Venmo QR Code
 - Google Analytics tracking
-- Coordinate-based text processingn algorithm
+- Coordinate-based text processing algorithm
 
 ### 0.0.3 - 2018-4-22
 #### Added

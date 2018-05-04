@@ -15,7 +15,9 @@ import skimage.io as skio
 import base64
 import boto
 import cv2
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import io
 import numpy as np
 import re

@@ -217,7 +217,7 @@ ul.leaders span + span {
 
 		                    <div class="media-body">
 		                      <h3 class="media-heading">Step 1</h3>
-		                      <p>Upload a image of a receipt with your smartphone. This will automatically store the image in Amazon Simple Storage Service (S3)</p>
+		                      <p>Upload a image of a receipt with your smartphone. Please make sure the image is straight with all four corners showing. This will automatically store the image in Amazon Simple Storage Service (S3)</p>
 
 		                     
 		                    </div> <!-- /.media-body -->
@@ -250,7 +250,7 @@ ul.leaders span + span {
 
 		                    <div class="media-body">
 		                      <h3 class="media-heading">Step 3</h3>
-		                      <p>Assign items to friends. Currently, it is one item per person. The feature to split the item to multiple people is coming soon!</p>
+		                      <p>Assign items to friends through the checkboxes. More than one person can be assigned to each item. If applicable, a tip can be added.</p>
 
 		                     
 		                    </div> <!-- /.media-body -->
@@ -267,7 +267,7 @@ ul.leaders span + span {
 
 		                    <div class="media-body">
 		                      <h3 class="media-heading">Step 4</h3>
-		                      <p>Wait for Stripe to charge credit cards accordingly.</p>
+		                      <p>Currently, the Venmo QR Code of users who are paying will be displayed. The feature to charge credit cards accordingly will be implemented in the future.</p>
 
 		                    </div> <!-- /.media-body -->
 		                  </div> <!-- /.media -->
@@ -396,6 +396,12 @@ function readURL(input) {
     <img src={{img_str}} height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
 
+
+{% if is_uploaded is defined %}
+Upload is successful!
+<br /><br />
+{% endif %}
+
 <form action="/process">
     <button type = "submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
@@ -403,10 +409,6 @@ function readURL(input) {
 		</div>
     </button>
 </form> <br />
-
-
-
-
 
 <br />
 <table cellspacing = '10'>
@@ -463,7 +465,7 @@ function readURL(input) {
     	<img src="/static/img/divide.png" alt="" align = "center" height = 75 width = 75>
 		</div>
     </button>
-
+<br /> <br />
 
 
   </form>

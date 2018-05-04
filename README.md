@@ -23,7 +23,6 @@ Please refer to our documentation [here](https://msds698.github.io/group-assignm
 - Google Analytics tracking
 - Coordinate-based text processing algorithm
 
-=======
 ### 0.0.4 - 2018-5-3
 #### Added
 - Improvements to UI

@@ -25,11 +25,11 @@ from text_processingv3 import simple_process
 
 # import os
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
-# "/Users/jingsong/MSAN/06Spring2018B/3DataScienceAppDevelopment/project/group-assignment-2-dvidr/code/main/apikey.json"
 
 
 # def detect_text(uri):
-#     """Detects text in the file located in Google Cloud Storage or on the Web.
+#     """Detects text in the file located in
+#        Google Cloud Storage or on the Web.
 #     """
 #     client = vision.ImageAnnotatorClient()
 #     image = types.Image()
@@ -107,7 +107,7 @@ def bounding_box(img_path, texts):
     img = plt.imread(img_path)
 
     # convert gray-scale to RGB
-    if len(img.shape)==2:
+    if len(img.shape) == 2:
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
     for text in texts[1:]:  # 0th bounding box is whole picture

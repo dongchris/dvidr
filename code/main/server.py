@@ -82,10 +82,10 @@ def process():
         output = simple_process(texts[0])  # process text
         assert output, 'empty dictionary'
 
-    except:
+    except Exception as e:
         img = download_img(img_url)  # original
         img_path = 'tmp/tmp.jpg'
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # for use of opencv
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)  # for use of opencv
         cv2.imwrite(img_path, img)
 
         # OCR on straightened image

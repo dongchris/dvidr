@@ -136,7 +136,7 @@ def filter_item(res):
                                    r'amount']))
     for i in res.keys():
         if (pattern.search(i.lower()) is None or 'tax' in i.lower()) and \
-            re.search(r'^\$?0.00$', res[i]) is None:
+             re.search(r'^\$?0.00$', res[i]) is None:
             res_clean[i] = res[i]
 
     return res_clean

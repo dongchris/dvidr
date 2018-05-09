@@ -51,13 +51,16 @@ def index():
 @app.route("/uploader", methods=['POST', 'GET'])
 def get_filename():
     """Retrieve file name after uploading image"""
+    
+
     print(request)
     global filename
     if request.method == 'POST':
         filename = request.form['filename']
         print('upload ', filename)
         is_uploaded = True
-        return render_template('index.html', is_uploaded=is_uploaded)
+        img_url = (readImagefromS3(filename))
+        return render_template('index.html', is_uploaded=is_uploaded, img_url=img_url)
     else:
         return render_template('index.html')
 
@@ -168,39 +171,47 @@ def split():
     function will allocate the prices for each payer. It will then
     print out the final prices for each user.
     """
+
     if request.method == "POST":
-        payer_list = [request.form.getlist("payer%s" % i, None)
-                      for i in range(len(items))]
-        tip_amount = float(request.form.getlist("tipamount")[0]
-                                       .encode('ascii'))
 
-        print(payer_list)
 
-        if payer_list is not None:
-            d = dict()
-            for i in range(len(items)):
-                for j in range(len(payer_list[i])):
-                    if payer_list[i][j] in d:
-                        d[payer_list[i][j]].append(
-                            prices2[i] / len(payer_list[i]))
-                    else:
-                        d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
-            global payer
-            global totalprice
-            payer = []
-            totalprice = []
+        try:
+            payer_list = [request.form.getlist("payer%s" % i, None)
+                          for i in range(len(items))]
+            tip_amount = float(request.form.getlist("tipamount")[0]
+                                           .encode('ascii'))
 
-            tip_amount = tip_amount / len(np.unique(payer_list))
-            print(tip_amount)
-            for key, val in d.items():
-                payer.append(key)
-                totalprice.append('%.2f' % (np.sum(val) + tip_amount))
+            print(payer_list)
 
-            combine = list(zip(payer, totalprice))
+            if payer_list is not None:
+                d = dict()
+                for i in range(len(items)):
+                    for j in range(len(payer_list[i])):
+                        if payer_list[i][j] in d:
+                            d[payer_list[i][j]].append(
+                                prices2[i] / len(payer_list[i]))
+                        else:
+                            d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
+                global payer
+                global totalprice
+                payer = []
+                totalprice = []
 
-            return render_template("index.html",
-                                   payer_list=payer_list, combine=combine)
-    return render_template("index.html")
+                tip_amount = tip_amount / len(np.unique(payer_list))
+                print(tip_amount)
+                for key, val in d.items():
+                    payer.append(key)
+                    totalprice.append('%.2f' % (np.sum(val) + tip_amount))
+
+                combine = list(zip(payer, totalprice))
+                is_processed = True
+                return render_template("index.html",
+                                       payer_list=payer_list, combine=combine, is_processed=is_processed)
+        except:
+            error = "You did not select any payers. Please try again."
+            print(error)
+            return render_template("index.html", error=error)
+    
 
 
 @app.route('/pay')

@@ -91,6 +91,7 @@ ul.leaders span + span {
     display:block;
 }
 
+
 </style>
 	    
 
@@ -306,10 +307,12 @@ ul.leaders span + span {
 
 <img src="/static/img/zero.png" alt = "" align = "left" height = "120px" width = "150px">
 		       <input type="file" id="file-chooser" onchange="readURL(this);"/>
+
+		       	<br /><h3>Please choose an image and upload.</h3>
+
 <br /><br /><br /><br /><br />
 
 	<img src="/static/img/one.png" alt = "" align = "left" height = "120px" width = "150px">
-	
 
     <button id="upload-button" style = "border:none; background-color: #FFFFFF;">
     	<div class ="process-circle wow zoomIn">
@@ -400,42 +403,52 @@ function readURL(input) {
     }
 
 
-
-
-
     </script>
 
+
+
     <form action = "/uploader" method="POST" name='myForm'>
-        <input id='filename' name='filename' type='hidden' />
-    </form>
+        <input id='filename' name='filename' type='hidden'/>
+	    </form>
 
 
 
-
-    <img id="blah" src="#" height = 500px width = 400px alt = ''
-     style = "float:right"/> 
 
     <img src={{img_str}} height = 500px width = 400px alt = ''
      style = "float:right"/> <br /> <br />
 
 
 {% if is_uploaded is defined %}
-Upload is successful!
+<h3>Upload is successful!<br />Please process the image.</h3>
+
+    <img src={{img_url}} height = 500px width = 400px alt = ''
+     style = "float:right"/>
+
+
 <br /><br />
 {% endif %}
 
 <img src="/static/img/two.png" alt = "" align = "left" height = "120px" width = "150px">
 <form action="/process">
-    <button type = "submit" style = "border:none; background-color: transparent;">
+
+    <button type = "submit" style = "border:none; background-color: transparent;" onclick="toggle();">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/glass.png" alt="" align = "center"
 			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'process', 'value':1});" >
 		</div>
     </button>
+
 </form> <br />
+
+
+
 
 <br />
 <table cellspacing = '10'>
+
+{% if texts is defined %}
+<h3>Please choose who is responsible for each item. If multiple people are selected, the price will be distributed evenly.</h3>
+{% endif %}
 
 
 {% for item, price, payer in texts %}
@@ -499,11 +512,18 @@ Upload is successful!
 
   <div id="result">
 
-    {% if payer_list is defined %}
+  <!--   {% if (payer_list is defined) and (is_processed is defined) %}
     <br /> You have selected: {{ payer_list }}
+	<br />{% for payer in uniq_list %}
+			Payers: {{ payer }}
+		  {% endfor %}
+
     {% endif %}
+ -->
+    {{ error }} <br /><br />
 
   </div>
+
 
 <!-- {% for payer, price in combine %}
 <p style = "padding:0px 25px 0px 0px;">
@@ -516,8 +536,8 @@ Upload is successful!
 
 {% for payer, price in combine %}
 
-<li><span>{{payer}}</span>
- <span>{{price}}</span></li>
+<h3><li><span>{{payer}}</span>
+ <span>{{price}}</span></li></h3>
 
 {% endfor %}
 

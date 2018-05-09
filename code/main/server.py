@@ -164,6 +164,12 @@ def register_post():
     return '<h1> Registered : ' + username + '</h1>'
 
 
+
+@app.route('/gallery')
+def gallery():
+    """Display user-stored images"""
+    return render_template('gallery.html')
+
 @app.route('/split', methods=['GET', 'POST'])
 def split():
     """

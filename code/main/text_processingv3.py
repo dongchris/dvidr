@@ -133,7 +133,9 @@ def filter_item(res):
                                    r'x{2,}',
                                    r'^$',
                                    r':',
-                                   r'amount']))
+                                   r'amount',
+                                   r'cash',
+                                   r'tota']))
     for i in res.keys():
         if (pattern.search(i.lower()) is None or 'tax' in i.lower()) and \
              re.search(r'^\$?0.00$', res[i]) is None:

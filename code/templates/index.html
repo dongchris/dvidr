@@ -83,14 +83,14 @@ ul.leaders span + span {
     background: white}
 
 
-.hidden{
-    display:none;
-}
-
-.unhidden{
-    display:block;
-}
-
+div#loading {
+    width: 100px;
+    height: 100px;
+    display: none;
+    background: url(/static/img/loading.gif) no-repeat;
+    cursor: wait;
+    margin-left: 150px;
+    }
 
 </style>
 	    
@@ -305,16 +305,19 @@ ul.leaders span + span {
 		                </div>
 		              </div> <!-- /.row -->
 
-<img src="/static/img/zero.png" alt = "" align = "left" height = "120px" width = "150px">
+<img src="/static/img/zero.png" alt = "" align = "left" height = "120px" width = "150px" id="zero">
 		       <input type="file" id="file-chooser" onchange="readURL(this);"/>
 
 		       	<br /><h3>Please choose an image and upload.</h3>
 
 <br /><br /><br /><br /><br />
 
-	<img src="/static/img/one.png" alt = "" align = "left" height = "120px" width = "150px">
+	<img src="/static/img/one.png" alt = "" align = "left" height = "120px" width = "150px" id="one">
 
-    <button id="upload-button" style = "border:none; background-color: #FFFFFF;">
+
+
+
+    <button id="upload-button" style = "border:none; background-color: #FFFFFF;" onclick="loading();" type="submit">
     	<div class ="process-circle wow zoomIn">
     	<img src="/static/img/upload" alt="" align = "center"
 			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'upload', 'value':1});" >
@@ -405,11 +408,17 @@ function readURL(input) {
 
     </script>
 
+<script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
 
-
-    <form action = "/uploader" method="POST" name='myForm'>
+    <form action = "/uploader#zero" method="POST" name='myForm'>
         <input id='filename' name='filename' type='hidden'/>
 	    </form>
+
 
 
 
@@ -428,10 +437,14 @@ function readURL(input) {
 <br /><br />
 {% endif %}
 
-<img src="/static/img/two.png" alt = "" align = "left" height = "120px" width = "150px">
-<form action="/process">
+<div id="loading"></div>
+    <div id="content">
+    </div> <br />    
 
-    <button type = "submit" style = "border:none; background-color: transparent;" onclick="toggle();">
+	    <img src="/static/img/two.png" alt = "" align = "left" height = "120px" width = "150px" id="two">
+<form action="/process#one">
+
+    <button type = "submit" style = "border:none; background-color: transparent;" onclick="loading();">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/glass.png" alt="" align = "center"
 			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'process', 'value':1});" >
@@ -442,8 +455,6 @@ function readURL(input) {
 
 
 
-
-<br />
 <table cellspacing = '10'>
 
 {% if texts is defined %}
@@ -453,7 +464,7 @@ function readURL(input) {
 
 {% for item, price, payer in texts %}
 	
-  <form id="form1" action="/split" method="POST" enctype="multipart/form-data">
+  <form id="form1" action="/split#two" method="POST" enctype="multipart/form-data">
 	
 	<table style = "width: 15%">
 	<fieldset>
@@ -497,7 +508,7 @@ function readURL(input) {
 </table>
 
 <br />
-<img src="/static/img/three.png" alt = "" align = "left" height = "120px" width = "150px">
+<img src="/static/img/three.png" alt = "" align = "left" height = "120px" width = "150px" id="three">
 <button type="submit" value = "Submit" style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/divide.png" alt="" align = "center" height = 75
@@ -544,8 +555,8 @@ function readURL(input) {
 </ul>
 
 
-<img src="/static/img/four.png" alt = "" align = "left" height = "120px" width = "150px">
-<form action="/pay">
+<img src="/static/img/four.png" alt = "" align = "left" height = "120px" width = "150px" id="four">
+<form action="/pay#four">
 <button style = "border:none; background-color: transparent;">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/card.png" alt="" align = "center" height = 75
@@ -598,7 +609,7 @@ function readURL(input) {
 							
 							<div class="col-sm-3 col-md-2 col-lg-2">
 								<div class="footer-widget">
-									<h3>Social</h3>
+									<h3 id='bottom'>Social</h3>
 									<ul>
 										<li><a href="#">Github</a></li>
 										

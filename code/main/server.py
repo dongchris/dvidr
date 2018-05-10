@@ -52,7 +52,6 @@ def index():
 def get_filename():
     """Retrieve file name after uploading image"""
     
-
     print(request)
     global filename
     if request.method == 'POST':
@@ -169,6 +168,11 @@ def register_post():
 def gallery():
     """Display user-stored images"""
     return render_template('gallery.html')
+
+@app.route('/friends')
+def friends():
+    """Display friends list"""
+    return render_template('friends.html')
 
 @app.route('/split', methods=['GET', 'POST'])
 def split():

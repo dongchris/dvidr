@@ -89,9 +89,9 @@ div#loading {
     display: none;
     background: url(/static/img/loading.gif) no-repeat;
     cursor: wait;
-    margin-left: 150px;
-    }
+    margin-left: 375px;
 
+    }
 
 
 </style>
@@ -143,6 +143,8 @@ div#loading {
 										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'start', 'value':1});">Start</a></li>
 									<li><a class="page-scroll" href="gallery"
 										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'start', 'value':1});">Your Receipts</a></li>
+										   <li><a class="page-scroll" href="friends"
+										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'start', 'value':1});">Friends</a></li>
 									<li><a class="page-scroll"
 										   href="register"
 										   onclick="gtag('event', 'reference', {'event_category': 'navigation', 'event_label': 'register', 'value':1});">Register</a></li>
@@ -314,7 +316,7 @@ div#loading {
 
 		       	<br /><h3>Please choose an image and upload.</h3>
 
-<br /><br /><br /><br /><br />
+<br /><br /><br /><br />
 
 	<img src="/static/img/one.png" alt = "" align = "left" height = "120px" width = "150px" id="one">
 
@@ -327,6 +329,9 @@ div#loading {
 			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'upload', 'value':1});" >
 
 		</div>
+
+
+
     </button>
 
 
@@ -417,6 +422,7 @@ function readURL(input) {
             $("#loading").show();
             $("#content").hide();       
         }
+
 // ]]></script>
 
     <form action = "/uploader#one" method="POST" name='myForm'>
@@ -428,34 +434,35 @@ function readURL(input) {
 
 
     <img src={{img_str}} height = 500px width = 400px alt = ''
-     style = "float:right"/> <br /> <br />
-
-
-{% if is_uploaded is defined %}
-<h3>Upload is successful!<br />Please process the image.</h3>
-
-    <img src={{img_url}} height = 500px width = 400px alt = ''
      style = "float:right"/>
 
 
-<br /><br />
-{% endif %}
 
 <div id="loading"></div>
     <div id="content">
     </div> <br />    
 
+
+{% if is_uploaded is defined %}
+<h3 style="text-align:right">Upload is successful!<br />Please process the image.</h3>
+
+    <img src={{img_url}} height = 500px width = 400px alt = ''
+     style = "float:right"/>
+
+{% endif %}
+
+
 	    <img src="/static/img/two.png" alt = "" align = "left" height = "120px" width = "150px" id="two">
 <form action="/process#one">
 
-    <button type = "submit" style = "border:none; background-color: transparent;" onclick="loading();">
+    <button type = "submit" style = "border:none; background-color: transparent;" onclick="loading();showtip();">
     	<div class ="process-circle wow zoomIn"><br />
     	<img src="/static/img/glass.png" alt="" align = "center"
 			 onmouseover="gtag('event', 'hover', {'event_category': 'button', 'event_label': 'process', 'value':1});" >
 		</div>
     </button>
 
-</form> <br />
+</form>
 
 
 
@@ -506,9 +513,9 @@ function readURL(input) {
 {% endfor %}
 
 
-
+<div id="content">
 <tr>
-<td>Tip: &nbsp; <input type = "text" name = tipamount maxlength = 6 size = 6 value = 0></td>
+<td>Tip: &nbsp; <input type = "text" name = tipamount maxlength = 6 size = 6 value = 0 ></td>
 </tr>
 
 
@@ -620,16 +627,19 @@ function readURL(input) {
 									<h3 id='bottom'>Social</h3>
 									<ul>
 										<li><a href="#">Github</a></li>
+
+
 										
 
 						<div class="row">
 							<div class="col-xs-12 text-center">
 								
 							</div>
+
 						</div>
 
 					</div><!-- /.container -->
-		
+		<br /><br /><br /> &copy; dvidr	
 				</footer>
 		
 				<!-- footer end -->

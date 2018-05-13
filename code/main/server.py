@@ -51,7 +51,7 @@ def index():
 @app.route("/uploader", methods=['POST', 'GET'])
 def get_filename():
     """Retrieve file name after uploading image"""
-    
+
     print(request)
     global filename
     if request.method == 'POST':
@@ -59,7 +59,8 @@ def get_filename():
         print('upload ', filename)
         is_uploaded = True
         img_url = (readImagefromS3(filename))
-        return render_template('index.html', is_uploaded=is_uploaded, img_url=img_url)
+        return render_template('index.html', is_uploaded=is_uploaded,
+                               img_url=img_url)
     else:
         return render_template('index.html')
 
@@ -163,16 +164,17 @@ def register_post():
     return '<h1> Registered : ' + username + '</h1>'
 
 
-
 @app.route('/gallery')
 def gallery():
     """Display user-stored images"""
     return render_template('gallery.html')
 
+
 @app.route('/friends')
 def friends():
     """Display friends list"""
     return render_template('friends.html')
+
 
 @app.route('/split', methods=['GET', 'POST'])
 def split():
@@ -183,7 +185,6 @@ def split():
     """
 
     if request.method == "POST":
-
 
         try:
             payer_list = [request.form.getlist("payer%s" % i, None)
@@ -201,7 +202,8 @@ def split():
                             d[payer_list[i][j]].append(
                                 prices2[i] / len(payer_list[i]))
                         else:
-                            d[payer_list[i][j]] = [prices2[i] / len(payer_list[i])]
+                            d[payer_list[i][j]] = [prices2[i] /
+                                                   len(payer_list[i])]
                 global payer
                 global totalprice
                 payer = []
@@ -216,12 +218,12 @@ def split():
                 combine = list(zip(payer, totalprice))
                 is_processed = True
                 return render_template("index.html",
-                                       payer_list=payer_list, combine=combine, is_processed=is_processed)
-        except:
+                                       payer_list=payer_list, combine=combine,
+                                       is_processed=is_processed)
+        except Exception as e:
             error = "You did not select any payers. Please try again."
             print(error)
             return render_template("index.html", error=error)
-    
 
 
 @app.route('/pay')

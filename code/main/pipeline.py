@@ -22,9 +22,9 @@ import sys
 
 from text_processingv3 import simple_process
 
-import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
-"/Users/patrick.yang/Desktop/usf/app_dev/group-assignment-2-dvidr/code/main/apikey.json"
+# import os
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
+# "/Users/patrick.yang/Desktop/usf/app_dev/group-assignment-2-dvidr/code/main/apikey.json"
 
 
 # def detect_text(uri):

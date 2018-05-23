@@ -3,6 +3,8 @@
 
 Our product (dvidr) is a web platform that enables users to take a picture of a receipt (groceries, restaurants, etc), identify the person responsible for each item, and charge the credit cards accordingly. The overall purpose of our product is to organize the receipts of our customers and simplify the process of splitting the bill.
 
+Our website can be found at https://www.dvidr.app
+
 # Contributors
 
 Chris Dong, Qian Li, Jing Song, Jay Xu, Patrick Yang
@@ -12,6 +14,16 @@ Chris Dong, Qian Li, Jing Song, Jay Xu, Patrick Yang
 Please refer to our documentation [here](https://msds698.github.io/group-assignment-2-dvidr/)
 
 # Changelog
+
+
+
+### 0.0.5 - 2018-5-9
+#### Added
+- Loading circle while processing
+- Basic friend's list
+- Prototype gallery
+- Display of numbers for easier UI
+- Purchase of dvidr.app domain
 
 ### 0.0.4 - 2018-5-3
 #### Added
